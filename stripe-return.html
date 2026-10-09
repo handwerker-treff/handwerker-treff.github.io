@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Zurück zu Handwerker Treff</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; background: #0D1B2A; color: #fff; display: flex; min-height: 100vh; align-items: center; justify-content: center; margin: 0; text-align: center; }
+  .box { padding: 24px; max-width: 360px; }
+  a { display: inline-block; margin-top: 18px; background: #FF8C00; color: #fff; text-decoration: none; padding: 12px 22px; border-radius: 12px; font-weight: 700; }
+  p { color: #9BA8B5; }
+</style>
+</head>
+<body>
+<div class="box">
+  <h2 id="title">Zurück zur App …</h2>
+  <p id="text">Du wirst zu Handwerker Treff weitergeleitet.</p>
+  <a id="link" href="handwerkertrefftest://stripe-onboarding">App öffnen</a>
+</div>
+<script>
+  var s = new URLSearchParams(location.search).get('s') || 'done';
+  var target = 'handwerkertrefftest://stripe-onboarding?status=' + encodeURIComponent(s);
+  document.getElementById('link').href = target;
+  if (s === 'refresh') {
+    document.getElementById('title').textContent = 'Einrichtung unterbrochen';
+    document.getElementById('text').textContent = 'Öffne die App und starte die Einrichtung erneut.';
+  }
+  setTimeout(function () { location.href = target; }, 300);
+</script>
+</body>
+</html>
