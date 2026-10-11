@@ -2,12 +2,9 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Handwerker Treff — Inhalte pflegen</title>
-<!-- Für echte Icon-Vorschauen im Icon-Auswahlfeld (dieselben Icon-Sets wie in der App: Ionicons + MaterialCommunityIcons/MDI). -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <style>
   :root {
     --navy: #0D1B2A;
@@ -203,107 +200,6 @@
   .toast.error { border-color: var(--danger); color: var(--danger); }
   .hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
   a.hint-link { color: var(--orange); }
-
-  /* --- Logo-Bibliothek --- */
-  .logo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; margin-top: 14px; }
-  .logo-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    position: relative;
-  }
-  .logo-card img { width: 52px; height: 52px; object-fit: contain; background: #fff; border-radius: 8px; }
-  .logo-card .logo-name { font-size: 11px; margin-top: 6px; color: #EAF0F6; word-break: break-word; }
-  .logo-card .logo-cat { font-size: 10px; color: var(--muted); margin-top: 2px; }
-  .logo-card .logo-del {
-    position: absolute; top: 4px; right: 4px;
-    background: rgba(0,0,0,0.55); border: none; color: #fff;
-    width: 20px; height: 20px; border-radius: 50%;
-    font-size: 11px; cursor: pointer; line-height: 1;
-  }
-  .logo-category-filters { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0; }
-  .logo-category-filters .tab { padding: 6px 12px; font-size: 12px; margin-bottom: 0; }
-  .search-input {
-    width: 100%;
-    padding: 9px 10px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--navy);
-    color: #fff;
-    font-size: 14px;
-  }
-
-  /* --- Logo-Auswahlfeld (in Tipps & Infos) --- */
-  .logo-picker-preview { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .logo-picker-preview img {
-    width: 44px; height: 44px; object-fit: contain;
-    background: #fff; border-radius: 8px; display: none;
-  }
-  .logo-picker-empty { font-size: 12px; color: var(--muted); }
-  .logo-picker-actions { display: flex; gap: 8px; }
-  .logo-picker-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-    z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px;
-  }
-  .logo-picker-modal {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px;
-    max-width: 560px;
-    width: 100%;
-    max-height: 82vh;
-    overflow-y: auto;
-  }
-  .logo-picker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; }
-  .logo-picker-item {
-    cursor: pointer;
-    text-align: center;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px;
-    background: var(--navy);
-  }
-  .logo-picker-item:hover { border-color: var(--orange); }
-  .logo-picker-item img { width: 40px; height: 40px; object-fit: contain; background: #fff; border-radius: 6px; }
-  .logo-picker-item span { display: block; font-size: 10px; color: var(--muted); margin-top: 4px; word-break: break-word; }
-
-  /* --- Icon-Auswahlfeld (statt blind Icon-Namen eintippen) --- */
-  .icon-picker-row { display: flex; align-items: center; gap: 8px; }
-  .icon-picker-row input[type="text"] { flex: 1; }
-  .icon-picker-preview {
-    width: 40px; height: 40px; flex-shrink: 0;
-    border-radius: 8px;
-    background: var(--navy);
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .icon-glyph-preview ion-icon, .icon-glyph-preview .mdi { font-size: 22px; color: var(--orange); }
-  .icon-glyph-empty { color: var(--muted); font-size: 16px; }
-  .icon-picker-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px;
-    max-height: 46vh; overflow-y: auto;
-  }
-  .icon-picker-item {
-    cursor: pointer; text-align: center;
-    border: 1px solid var(--border); border-radius: 8px;
-    padding: 10px 6px; background: var(--navy);
-  }
-  .icon-picker-item:hover { border-color: var(--orange); }
-  .icon-picker-item .icon-glyph { display: block; margin-bottom: 4px; }
-  .icon-picker-item .icon-glyph ion-icon, .icon-picker-item .icon-glyph .mdi { font-size: 24px; color: #EAF0F6; }
-  .icon-picker-item .icon-picker-label { display: block; font-size: 9px; color: var(--muted); word-break: break-word; line-height: 1.3; }
-
-  /* --- Farbauswahlfeld (statt blind Hex-Codes eintippen) --- */
-  .color-picker-row { display: flex; align-items: center; gap: 8px; }
-  .color-picker-row input[type="text"] { flex: 1; }
-  .color-picker-row input[type="color"] {
-    width: 40px; height: 40px; flex-shrink: 0;
-    padding: 0; border: 1px solid var(--border); border-radius: 8px;
-    background: none; cursor: pointer;
-  }
 </style>
 </head>
 <body>
@@ -311,7 +207,7 @@
 <div id="loginScreen">
   <div class="badge" style="margin: 0 auto 10px;">HT</div>
   <h2 style="margin:0;">Handwerker Treff</h2>
-  <p>Passwort eingeben, um Werbepartner und Tipps/Infos zu pflegen.</p>
+  <p>Passwort eingeben, um Werbepartner, Tipps/Infos und Experten zu pflegen.</p>
   <input type="password" id="passwordInput" placeholder="Passwort" autofocus>
   <button onclick="tryLogin()">Anmelden</button>
   <div id="loginError"></div>
@@ -326,11 +222,7 @@
     <div class="tabs">
       <div class="tab active" data-tab="ads" onclick="switchTab('ads')">Werbepartner</div>
       <div class="tab" data-tab="infos" onclick="switchTab('infos')">Tipps &amp; Infos</div>
-      <div class="tab" data-tab="places" onclick="switchTab('places')">Regionales</div>
-      <div class="tab" data-tab="expert_profiles" onclick="switchTab('expert_profiles')">Meister</div>
-      <div class="tab" data-tab="trades" onclick="switchTab('trades')">Gewerke</div>
-      <div class="tab" data-tab="remote_config" onclick="switchTab('remote_config')">Einstellungen</div>
-      <div class="tab" data-tab="logos" onclick="switchTab('logos')">Logos</div>
+      <div class="tab" data-tab="experts" onclick="switchTab('experts')">Experten <span id="pendingBadge"></span></div>
     </div>
 
     <div id="tab-ads">
@@ -345,128 +237,12 @@
       <button class="add-btn" onclick="openEditor('infos')">+ Neuer Eintrag</button>
     </div>
 
-    <div id="tab-places" style="display:none;">
-      <div class="section-title">Regionales (Imbisse, Unterkünfte, Camping …)</div>
-      <p class="hint" style="margin-bottom: 14px;">Diese Einträge erscheinen in der App unter „Entdecken → Regionales“ mit Umkreissuche. Lat/Lng kannst du leer lassen – sie werden beim Speichern automatisch aus Adresse/PLZ/Ort ermittelt (OpenStreetMap).</p>
-      <div class="card" style="display:block; margin-bottom:16px;">
-        <b>Automatisch aus OpenStreetMap importieren</b>
-        <p class="hint" style="margin:6px 0 10px;">Holt Gastronomie, Unterkünfte und Camping im Umkreis einer PLZ. Die Einträge landen als <b>Entwurf</b> (nicht sichtbar). Prüfe sie unten (ausgegraut) und schalte sie frei. Bereits vorhandene Einträge werden nicht überschrieben.</p>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:8px;">
-          <input id="impPlz" placeholder="PLZ, z. B. 26215" maxlength="5" style="width:130px;">
-          <select id="impRadius"><option value="5">5 km</option><option value="10">10 km</option><option value="15" selected>15 km</option><option value="25">25 km</option><option value="30">30 km</option></select>
-        </div>
-        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-bottom:10px; font-size:14px;">
-          <label><input type="checkbox" id="impGastro" checked> Gastronomie</label>
-          <label><input type="checkbox" id="impUnterkunft" checked> Unterkünfte</label>
-          <label><input type="checkbox" id="impCamping" checked> Camping</label>
-          <label style="color:#b45309;"><input type="checkbox" id="impPublish"> Sofort freigeben (ohne Entwurf)</label>
-        </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="add-btn" style="margin:0;" onclick="importPlaces()">Importieren</button>
-          <button class="add-btn" style="margin:0;" onclick="placesBulk('publish_drafts')">Alle Entwürfe freigeben</button>
-          <button class="add-btn" style="margin:0; background:#b91c1c;" onclick="placesBulk('delete_drafts')">Alle Entwürfe löschen</button>
-        </div>
-        <div id="impResult" class="hint" style="margin-top:10px;"></div>
-      </div>
-      <div class="card" style="display:block; margin-bottom:16px;">
-        <b>Sammelimport: ganz Niedersachsen &amp; Bremen</b>
-        <p class="hint" style="margin:6px 0 10px;">Arbeitet automatisch 153 Gebietskacheln ab (ca. 30–60 Minuten). Dieses Fenster muss dabei <b>offen bleiben</b>. Es nutzt die Kategorien und das Häkchen „Sofort freigeben“ von oben. Bei Abbruch oder Fehler setzt ein erneuter Start dort fort, wo es aufgehört hat.</p>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="add-btn" style="margin:0;" id="bulkStartBtn" onclick="bulkImport()">Sammelimport starten</button>
-          <button class="add-btn" style="margin:0; background:#6b7280;" onclick="bulkStop()">Stopp</button>
-          <button class="add-btn" style="margin:0; background:#6b7280;" onclick="bulkReset()">Fortschritt zurücksetzen</button>
-        </div>
-        <div id="bulkResult" class="hint" style="margin-top:10px;"></div>
-      </div>
-      <div id="placesList"></div>
-      <button class="add-btn" onclick="openEditor('places')">+ Neuer Eintrag</button>
-    </div>
-
-    <div id="tab-expert_profiles" style="display:none;">
-      <div class="section-title">Meister per Video – Experten freischalten</div>
-      <p class="hint" style="margin-bottom: 14px;">Hier erscheinen alle, die sich in der App als Experte eingetragen haben. Erst mit gesetztem Haken „Freigeschaltet“ sind sie in der App sichtbar und buchbar. Prüfe vorher Headline und Qualifikation.</p>
-      <div id="expert_profilesList"></div>
-    </div>
-
-    <div id="tab-trades" style="display:none;">
-      <div class="section-title">Gewerke – Auswahl im Profil</div>
-      <p class="hint" style="margin-bottom: 14px;">Diese Liste sieht jeder in der App bei „Gewerke wählen“. Neue Einträge sind sofort nach dem nächsten App-Start sichtbar (kein Update nötig). Jedes Gewerk bekommt automatisch eine eigene Gruppe. Mit dem Haken „Sichtbar in der App“ kannst du ein Gewerk ausblenden, ohne es zu löschen.</p>
-      <div class="section-title" style="font-size:15px;">Von Nutzern selbst eingetragen (noch nicht in der Liste)</div>
-      <div id="tradesSuggest" style="margin-bottom: 18px;"></div>
-      <div id="tradesList"></div>
-      <button class="add-btn" onclick="openEditor('trades')">+ Neues Gewerk</button>
-    </div>
-
-    <div id="tab-remote_config" style="display:none;">
-      <div class="section-title">Push-Benachrichtigung an alle senden</div>
-      <p class="hint" style="margin-bottom: 10px;">Schickt sofort eine echte Push-Benachrichtigung an alle Nutzer mit installierter App -- genau wie bei einer neuen Chat-Nachricht, nur an alle statt an eine Person. Bitte sparsam einsetzen, nur für wichtige Ankündigungen.</p>
-      <form id="broadcastPushForm" class="editor open" style="margin-bottom: 24px;">
-        <div class="row">
-          <label>Titel</label>
-          <input type="text" id="broadcastTitleInput" placeholder="z. B. Handwerker Treff" required>
-        </div>
-        <div class="row">
-          <label>Text</label>
-          <textarea rows="2" id="broadcastBodyInput" placeholder="z. B. Neu: Umkreissuche ist jetzt verfügbar!" required></textarea>
-        </div>
-        <div class="actions">
-          <button type="submit" class="btn btn-primary">Push an alle senden</button>
-        </div>
-      </form>
-
-      <div class="section-title">Einstellungen (App-Konfiguration ohne Update)</div>
-      <p class="hint" style="margin-bottom: 14px;">Diese Werte liest die App live aus der Datenbank -- eine Änderung hier wirkt sich (fast) sofort in der App aus, ganz ohne neues Update/Build.</p>
-      <div id="remote_configList"></div>
-      <button class="add-btn" onclick="openEditor('remote_config')">+ Neue Einstellung</button>
-    </div>
-
-    <div id="tab-logos" style="display:none;">
-      <div class="section-title">Logo-Bibliothek</div>
-      <p class="hint" style="margin-bottom: 14px;">Lade hier Logo-Bilder hoch. Bei "Tipps &amp; Infos" kannst du dann eines davon als Logo auswählen -- über Suchbegriffe (z. B. "hammer") und Kategorien (Werkzeuge, Autos, Sonstiges oder eine eigene) findest du sie leicht wieder.</p>
-
-      <form id="logoUploadForm" class="editor open" style="margin-bottom: 20px;">
-        <div class="row">
-          <label>Bild-Datei(en)</label>
-          <input type="file" id="logoFileInput" accept="image/*" multiple required>
-          <div class="hint">Du kannst im Dateidialog mehrere Bilder auf einmal auswählen (Mehrfachauswahl, z. B. mit Cmd/Strg gedrückt halten). Bei mehreren Dateien wird der Name automatisch aus dem jeweiligen Dateinamen erzeugt -- Kategorie und Suchbegriffe unten gelten dann für alle ausgewählten Bilder.</div>
-        </div>
-        <div class="row">
-          <label>Name (nur bei einer einzelnen Datei)</label>
-          <input type="text" id="logoNameInput" placeholder="z. B. Hammer rot">
-        </div>
-        <div class="row two-col">
-          <div>
-            <label>Kategorie</label>
-            <select id="logoCategorySelect" onchange="onLogoCategoryChange()">
-              <option value="werkzeuge">Werkzeuge</option>
-              <option value="autos">Autos</option>
-              <option value="sonstiges">Sonstiges</option>
-              <option value="__custom__">Eigene Kategorie...</option>
-            </select>
-          </div>
-          <div id="logoCustomCategoryWrap" style="display:none;">
-            <label>Eigene Kategorie</label>
-            <input type="text" id="logoCustomCategoryInput" placeholder="z. B. Elektro">
-          </div>
-        </div>
-        <div class="row">
-          <label>Suchbegriffe (Komma-getrennt)</label>
-          <input type="text" id="logoTagsInput" placeholder="z. B. hammer, werkzeug, schlagen">
-          <div class="hint">Damit findest du die Logos später über die Suche wieder. Gilt für alle Dateien in diesem Durchgang.</div>
-        </div>
-        <div class="actions">
-          <button type="submit" class="btn btn-primary">Hochladen</button>
-        </div>
-      </form>
-
-      <div class="row" style="margin-bottom: 14px;">
-        <button type="button" class="btn btn-secondary" id="simpleIconsImportBtn" onclick="importSimpleIcons()">Marken-Logos importieren (Simple Icons)</button>
-        <div class="hint">Importiert einmalig über 3.000 bekannte Marken-Logos (Bosch, BMW, Audi, VW, Ford, u.v.m.) in die Kategorie "marken" -- danach über die Suche wiederfindbar. Dauert ein paar Minuten, der Tab muss dabei offen bleiben. Ein zweiter Klick überspringt bereits importierte Logos.</div>
-      </div>
-
-      <input type="text" class="search-input" id="logoSearchInput" placeholder="Suchen, z. B. hammer" oninput="renderLogoGrid()">
-      <div class="logo-category-filters" id="logoCategoryFilters"></div>
-      <div class="logo-grid" id="logoGrid"></div>
+    <div id="tab-experts" style="display:none;">
+      <div class="section-title">Nachweise prüfen</div>
+      <p class="hint">Prüfen: Stimmt der Name mit dem Profil überein? Passt der Nachweis zur angegebenen Qualifikation (Meisterbrief bzw. Handwerkskarte für „Meister“)? Bei Betrieben: Passt der Firmenname zu Handwerkskarte/Gewerbeanmeldung? Nach Freigabe oder Ablehnung wird die Datei automatisch gelöscht.</p>
+      <div id="docsList"></div>
+      <div class="section-title" style="margin-top:28px;">Alle Experten</div>
+      <div id="expertsList"></div>
     </div>
   </main>
 </div>
@@ -479,26 +255,19 @@
 // Supabase-Projekt ändert, hier anpassen (Dashboard -> Edge Functions ->
 // admin-content -> URL kopieren).
 const FUNCTION_URL = 'https://beleepsctqfoewxyomjj.supabase.co/functions/v1/admin-content';
-// URL der Edge Function "admin-logos" (Logo-Bibliothek, separat wegen
-// Bild-Upload). Dashboard -> Edge Functions -> admin-logos -> URL kopieren.
-const LOGOS_FUNCTION_URL = 'https://beleepsctqfoewxyomjj.supabase.co/functions/v1/admin-logos';
-// URL der Edge Function "send-broadcast-push" (Push-Rundruf an alle Nutzer).
-const IMPORT_PLACES_URL = 'https://beleepsctqfoewxyomjj.supabase.co/functions/v1/import-places';
-const BROADCAST_FUNCTION_URL = 'https://beleepsctqfoewxyomjj.supabase.co/functions/v1/send-broadcast-push';
 
 const FIELD_CONFIG = {
   ads: {
     label: 'Werbepartner',
-    idField: 'id',
     fields: [
-      { key: 'category', label: 'Kategorie', type: 'select-editable', options: ['werkzeug', 'kleidung', 'fahrzeuge', 'sonstiges'], hint: 'Eigene Kategorie? Unten "Eigene Kategorie..." wählen und Namen eintippen.' },
+      { key: 'category', label: 'Kategorie', type: 'select', options: ['werkzeug', 'kleidung', 'fahrzeuge', 'sonstiges'] },
       { key: 'name', label: 'Name', type: 'text', required: true },
       { key: 'tagline', label: 'Slogan / Tagline', type: 'text' },
-      { key: 'icon', label: 'Icon', type: 'icon-picker', hint: 'Wird nur angezeigt, wenn weder Logo- noch Banner-Bild gesetzt ist.' },
-      { key: 'logo_url', label: 'Logo (aus Logo-Bibliothek)', type: 'logo-picker', hint: 'Optional, zusätzlich zum Icon oben. Falls gesetzt, wird das Logo-Bild statt des Icons angezeigt. Logos verwaltest du im Tab "Logos".' },
+      { key: 'icon', label: 'Icon', type: 'text', hint: 'Ionicons-Name (z. B. hammer-outline), oder für mehr Auswahl mit "mci:" davor ein MaterialCommunityIcons-Name (z. B. mci:hammer-wrench). Vorschau: <a class="hint-link" href="https://icons.expo.fyi" target="_blank">icons.expo.fyi</a>. Wird nur angezeigt, wenn weder Logo- noch Banner-Bild gesetzt ist.' },
+      { key: 'logo_url', label: 'Logo-Bild-URL (optional)', type: 'text', hint: 'Kleines quadratisches Logo (z. B. aus Supabase Storage). Leer lassen für Icon statt Logo.' },
       { key: 'image_url', label: 'Banner-Bild-URL (optional)', type: 'text', hint: 'Breites Bild oben in der Karte, wie ein richtiges Werbebanner. Wird ignoriert, wenn unten ein Hintergrundbild gesetzt ist.' },
-      { key: 'bg_color', label: 'Hintergrundfarbe (optional)', type: 'color-picker', hint: 'Leer lassen für die normale dunkle Kartenfarbe.' },
-      { key: 'text_color', label: 'Schriftfarbe (optional)', type: 'color-picker', hint: 'Leer lassen für die normale weiße Schrift.' },
+      { key: 'bg_color', label: 'Hintergrundfarbe (optional)', type: 'text', hint: 'Hex-Farbcode ohne #, z. B. FF8C00. Leer lassen für die normale dunkle Kartenfarbe.' },
+      { key: 'text_color', label: 'Schriftfarbe (optional)', type: 'text', hint: 'Hex-Farbcode ohne #, z. B. FFFFFF. Leer lassen für die normale weiße Schrift.' },
       { key: 'bg_image_url', label: 'Hintergrundbild für die ganze Karte (optional)', type: 'text', hint: 'Füllt die komplette Karte mit einem Bild (leicht abgedunkelt für Lesbarkeit), Text liegt darüber. Ersetzt das Banner-Bild oben.' },
       { key: 'link', label: 'Link (optional, z. B. Website)', type: 'text' },
       { key: 'sort_order', label: 'Reihenfolge (kleinere Zahl = weiter oben)', type: 'number' },
@@ -509,110 +278,26 @@ const FIELD_CONFIG = {
   },
   infos: {
     label: 'Tipps & Infos',
-    idField: 'id',
     fields: [
       { key: 'kind', label: 'Art', type: 'select', options: [['event', 'Event'], ['news', 'News'], ['tip', 'Tipp'], ['job', 'Job']] },
       { key: 'title', label: 'Titel', type: 'text', required: true },
       { key: 'subtitle', label: 'Beschreibung', type: 'textarea' },
       { key: 'meta', label: 'Zusatzinfo (optional, z. B. Datum/Ort)', type: 'text' },
-      { key: 'icon', label: 'Icon', type: 'icon-picker', hint: 'Wird nur angezeigt, wenn kein Logo gesetzt ist.' },
+      { key: 'icon', label: 'Icon', type: 'text', hint: 'Ionicons-Name (z. B. bulb-outline), oder für mehr Auswahl mit "mci:" davor ein MaterialCommunityIcons-Name (z. B. mci:calendar-star). Vorschau: <a class="hint-link" href="https://icons.expo.fyi" target="_blank">icons.expo.fyi</a>.' },
       { key: 'image_url', label: 'Banner-Bild-URL (optional)', type: 'text', hint: 'Breites Bild oben in der Karte, wie ein richtiges Werbebanner. Wird ignoriert, wenn unten ein Hintergrundbild gesetzt ist.' },
-      { key: 'bg_color', label: 'Hintergrundfarbe (optional)', type: 'color-picker', hint: 'Leer lassen für die normale dunkle Kartenfarbe.' },
-      { key: 'text_color', label: 'Schriftfarbe (optional)', type: 'color-picker', hint: 'Leer lassen für die normale weiße Schrift.' },
+      { key: 'bg_color', label: 'Hintergrundfarbe (optional)', type: 'text', hint: 'Hex-Farbcode ohne #, z. B. 2C5F2D. Leer lassen für die normale dunkle Kartenfarbe.' },
+      { key: 'text_color', label: 'Schriftfarbe (optional)', type: 'text', hint: 'Hex-Farbcode ohne #, z. B. FFFFFF. Leer lassen für die normale weiße Schrift.' },
       { key: 'bg_image_url', label: 'Hintergrundbild für die ganze Karte (optional)', type: 'text', hint: 'Füllt die komplette Karte mit einem Bild (leicht abgedunkelt für Lesbarkeit), Text liegt darüber. Ersetzt das Banner-Bild oben.' },
-      { key: 'logo_url', label: 'Logo (aus Logo-Bibliothek)', type: 'logo-picker', hint: 'Optional, zusätzlich zum Icon oben. Falls gesetzt, wird das Logo-Bild statt des Icons angezeigt. Logos verwaltest du im Tab "Logos".' },
       { key: 'sort_order', label: 'Reihenfolge (kleinere Zahl = weiter oben)', type: 'number' },
       { key: 'active', label: 'Sichtbar in der App', type: 'checkbox' },
     ],
     titleField: 'title',
     subtitleField: 'subtitle',
   },
-  expert_profiles: {
-    label: 'Meister',
-    idField: 'user_id',
-    fields: [
-      { key: 'user_id', label: 'Nutzer-ID', type: 'text', disabledOnEdit: true },
-      { key: 'approved', label: 'Freigeschaltet (in der App sichtbar & buchbar)', type: 'checkbox' },
-      { key: 'is_active', label: 'Vom Experten aktiv geschaltet', type: 'checkbox' },
-      { key: 'headline', label: 'Überschrift', type: 'text' },
-      { key: 'bio', label: 'Über mich', type: 'textarea' },
-      { key: 'qualification', label: 'Qualifikation', type: 'select', options: [['meister', 'Meister'], ['geselle', 'Geselle'], ['hobby', 'Erfahrener Hobby-Handwerker']] },
-      { key: 'price_15min_cents', label: 'Preis pro 15 Min. in Cent (500 = 5 €)', type: 'number' },
-    ],
-    titleField: 'headline',
-    subtitleField: 'bio',
-    subtitleRender: (row) => (row.approved ? '✅ freigeschaltet' : '⏳ wartet auf Freischaltung') + ' · ' + ((row.price_15min_cents || 0) / 100).toFixed(2).replace('.', ',') + ' €/15 Min. · ' + (row.qualification || ''),
-  },
-  trades: {
-    label: 'Gewerke',
-    idField: 'id',
-    fields: [
-      { key: 'category', label: 'Obergruppe', type: 'select-editable', options: ['Bau & Rohbau', 'Ausbau & Innenausbau', 'Haustechnik & Energie', 'Metall & Holz', 'Garten & Landschaft', 'Gebäudeservice', 'Fahrzeuge & Maschinen', 'Dienstleistungen', 'Planung & Beratung', 'Sonstiges'], hint: 'Unter welcher Überschrift das Gewerk in der Auswahl erscheint.' },
-      { key: 'label', label: 'Name des Gewerks', type: 'text', required: true, hint: 'So sieht es der Nutzer. Nachträglich umbenennen lieber vermeiden – bei bestehenden Profilen bleibt sonst der alte Name stehen.' },
-      { key: 'id', label: 'Kurzname / ID (leer lassen = wird automatisch erzeugt)', type: 'text', disabledOnEdit: true, hint: 'Nur Kleinbuchstaben, z. B. gaertner. Danach nicht mehr änderbar.' },
-      { key: 'icon', label: 'Icon (Ionicons-Name)', type: 'text', hint: 'z. B. leaf, hammer, flash, car, sparkles, briefcase. Leer = construct. Namen auf ionic.io/ionicons.' },
-      { key: 'keywords', label: 'Suchbegriffe (optional, mit Leerzeichen)', type: 'text', hint: 'Damit auch Wörter gefunden werden, die nicht im Namen stehen, z. B. „rasen hecke mähen“.' },
-      { key: 'sort_order', label: 'Reihenfolge (kleinere Zahl = weiter oben)', type: 'number' },
-      { key: 'active', label: 'Sichtbar in der App', type: 'checkbox' },
-    ],
-    titleField: 'label',
-    subtitleField: 'category',
-    subtitleRender: (row) => (row.category || '') + (row.active === false ? ' · ausgeblendet' : ''),
-  },
-  places: {
-    label: 'Regionales',
-    idField: 'id',
-    fields: [
-      { key: 'category', label: 'Kategorie', type: 'select-editable', options: [['imbiss', 'Imbiss'], ['restaurant', 'Restaurant'], ['unterkunft', 'Unterkunft'], ['camping', 'Camping'], ['sonstiges', 'Sonstiges']], hint: 'Für die App-Filter bitte eine der Standard-Kategorien nehmen.' },
-      { key: 'name', label: 'Name', type: 'text', required: true },
-      { key: 'description', label: 'Beschreibung', type: 'textarea' },
-      { key: 'address', label: 'Straße & Hausnummer', type: 'text' },
-      { key: 'plz', label: 'PLZ', type: 'text' },
-      { key: 'city', label: 'Ort', type: 'text' },
-      { key: 'lat', label: 'Breitengrad (optional, wird automatisch ermittelt)', type: 'decimal' },
-      { key: 'lng', label: 'Längengrad (optional, wird automatisch ermittelt)', type: 'decimal' },
-      { key: 'phone', label: 'Telefon (optional)', type: 'text' },
-      { key: 'website', label: 'Webseite (optional)', type: 'text' },
-      { key: 'image_url', label: 'Bild-URL (optional)', type: 'text' },
-      { key: 'sort_order', label: 'Reihenfolge (kleinere Zahl = weiter oben)', type: 'number' },
-      { key: 'active', label: 'Sichtbar in der App', type: 'checkbox' },
-    ],
-    titleField: 'name',
-    subtitleField: 'description',
-    subtitleRender: (row) => [row.category, [row.plz, row.city].filter(Boolean).join(' ')].filter(Boolean).join(' · '),
-  },
-  remote_config: {
-    label: 'Einstellungen',
-    idField: 'key',
-    fields: [
-      {
-        key: 'key',
-        label: 'Schlüssel',
-        type: 'text',
-        required: true,
-        disabledOnEdit: true,
-        hint: 'Eindeutiger Name, z. B. maintenance_mode oder welcome_banner_text. Nach dem Anlegen nicht mehr änderbar (zum "Umbenennen" neuen Schlüssel anlegen und alten löschen).',
-      },
-      {
-        key: 'value',
-        label: 'Wert (als JSON)',
-        type: 'json',
-        hint: 'Muss gültiges JSON sein. Beispiele: <code>true</code>, <code>false</code>, <code>"Ein Text in Anführungszeichen"</code>, <code>123</code>, <code>null</code>.',
-      },
-      { key: 'description', label: 'Beschreibung (optional, nur intern)', type: 'text' },
-    ],
-    titleField: 'key',
-    subtitleField: 'description',
-    subtitleRender: (row) => {
-      const preview = JSON.stringify(row.value);
-      return row.description ? row.description + '  —  ' + preview : preview;
-    },
-  },
 };
 
 let password = '';
-let dataCache = { ads: [], infos: [], places: [], expert_profiles: [], trades: [], remote_config: [], logos: [] };
-let logoCategoryFilter = 'alle';
+let dataCache = { ads: [], infos: [] };
 
 function toast(msg, isError) {
   const t = document.getElementById('toast');
@@ -628,17 +313,6 @@ async function callApi(table, action, extra) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ password, table, action, ...extra }),
-  });
-  const body = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(body.error || ('Fehler ' + res.status));
-  return body;
-}
-
-async function callLogosApi(action, extra) {
-  const res = await fetch(LOGOS_FUNCTION_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ password, action, ...extra }),
   });
   const body = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(body.error || ('Fehler ' + res.status));
@@ -679,20 +353,7 @@ function showApp() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   renderList('ads');
-  Object.keys(FIELD_CONFIG).filter((t) => t !== 'ads').forEach((t) => loadTable(t));
-  loadTradeSuggestions();
-  loadLogos();
-}
-
-async function loadLogos() {
-  try {
-    const body = await callLogosApi('list');
-    dataCache.logos = body.data || [];
-    renderLogoCategoryFilters();
-    renderLogoGrid();
-  } catch (e) {
-    toast(e.message, true);
-  }
+  loadTable('infos');
 }
 
 async function loadTable(table) {
@@ -707,9 +368,124 @@ async function loadTable(table) {
 
 function switchTab(tab) {
   document.querySelectorAll('.tab').forEach((el) => el.classList.toggle('active', el.dataset.tab === tab));
-  const allTabs = Object.keys(FIELD_CONFIG).concat(['logos']);
-  allTabs.forEach((t) => {
-    document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
+  document.getElementById('tab-ads').style.display = tab === 'ads' ? 'block' : 'none';
+  document.getElementById('tab-infos').style.display = tab === 'infos' ? 'block' : 'none';
+  document.getElementById('tab-experts').style.display = tab === 'experts' ? 'block' : 'none';
+  if (tab === 'experts') loadExperts();
+}
+
+// ---- Experten & Nachweise ----
+const QUAL_LABEL = { meister: 'Meister', geselle: 'Geselle', hobby: 'Hobby-Handwerker' };
+const DOC_LABEL = { meisterbrief: 'Meisterbrief', gesellenbrief: 'Gesellenbrief', handwerkskarte: 'Handwerkskarte', haftpflicht: 'Berufshaftpflicht', gewerbeschein: 'Gewerbeanmeldung' };
+
+function esc(v) {
+  return String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+async function loadExperts() {
+  try {
+    const [docs, experts] = await Promise.all([
+      callApi('expert_documents', 'pending'),
+      callApi('expert_profiles', 'overview'),
+    ]);
+    renderDocs(docs.data || []);
+    renderExperts(experts.data || []);
+  } catch (e) {
+    toast(e.message, true);
+  }
+}
+
+function renderDocs(rows) {
+  const box = document.getElementById('docsList');
+  document.getElementById('pendingBadge').textContent = rows.length ? '(' + rows.length + ')' : '';
+  if (!rows.length) {
+    box.innerHTML = '<p class="hint">Keine offenen Nachweise.</p>';
+    return;
+  }
+  box.innerHTML = '';
+  rows.forEach((r) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.cssText = 'display:block;padding:14px;';
+    const isPdf = (r.storage_path || '').toLowerCase().endsWith('.pdf');
+    const preview = !r.url
+      ? '<p class="hint">Datei nicht mehr vorhanden.</p>'
+      : isPdf
+        ? '<a class="hint-link" href="' + esc(r.url) + '" target="_blank">PDF öffnen</a>'
+        : '<a href="' + esc(r.url) + '" target="_blank"><img src="' + esc(r.url) + '" style="max-width:100%;max-height:420px;border-radius:10px;margin:10px 0;display:block;"></a>';
+    card.innerHTML =
+      '<div style="font-weight:700;font-size:16px;">' + esc(r.name) + '</div>' +
+      '<div class="hint">Eingereicht: ' + esc(DOC_LABEL[r.doc_type] || r.doc_type) +
+      (r.kind === 'qualification' ? ' · Angegebene Qualifikation: <b>' + esc(QUAL_LABEL[r.qualification] || '–') + '</b>' : '') +
+      (r.kind === 'business' ? ' · <b>Betriebsprüfung</b> für „' + esc(r.business_name || '–') + '“ (berechtigt zum Ausschreiben von Stellen)' : '') +
+      ' · ' + new Date(r.created_at).toLocaleString('de-DE') + '</div>' +
+      (r.headline ? '<div class="hint">„' + esc(r.headline) + '“</div>' : '') +
+      preview;
+    const ok = document.createElement('button');
+    ok.textContent = '✓ Freigeben';
+    ok.style.cssText = 'background:#16A34A;border:none;color:#fff;padding:9px 16px;border-radius:8px;font-weight:700;cursor:pointer;margin-right:8px;';
+    ok.onclick = () => reviewDoc(r, true);
+    const no = document.createElement('button');
+    no.textContent = '✗ Ablehnen';
+    no.style.cssText = 'background:var(--danger);border:none;color:#fff;padding:9px 16px;border-radius:8px;font-weight:700;cursor:pointer;';
+    no.onclick = () => reviewDoc(r, false);
+    card.appendChild(ok);
+    card.appendChild(no);
+    box.appendChild(card);
+  });
+}
+
+async function reviewDoc(r, approve) {
+  let reason = '';
+  if (!approve) {
+    reason = prompt('Grund für die Ablehnung (sieht der Experte in der App):', 'Dokument nicht lesbar') ;
+    if (reason === null) return;
+  } else if (!confirm('Nachweis von ' + r.name + ' freigeben? Die Datei wird danach gelöscht.')) {
+    return;
+  }
+  try {
+    await callApi('expert_documents', 'review', { id: r.id, approve, reason });
+    toast(approve ? 'Freigegeben – Datei gelöscht.' : 'Abgelehnt – Datei gelöscht.');
+    loadExperts();
+  } catch (e) {
+    toast(e.message, true);
+  }
+}
+
+function renderExperts(rows) {
+  const box = document.getElementById('expertsList');
+  if (!rows.length) {
+    box.innerHTML = '<p class="hint">Noch keine Experten.</p>';
+    return;
+  }
+  box.innerHTML = '';
+  rows.forEach((r) => {
+    const item = document.createElement('div');
+    item.className = 'card';
+    item.style.cssText = 'display:flex;align-items:center;gap:12px;padding:12px 14px;';
+    const qual = QUAL_LABEL[r.qualification] || '–';
+    const checked = r.qualification === 'hobby' ? 'kein Nachweis nötig' : (r.qualification_verified ? '✓ geprüft' : '✗ nicht geprüft');
+    item.innerHTML =
+      '<div style="flex:1;">' +
+      '<div style="font-weight:700;">' + esc(r.profiles?.name || 'Unbekannt') + (r.approved ? '' : ' <span style="color:var(--orange);">(wartet auf Freischaltung)</span>') + '</div>' +
+      '<div class="hint">' + esc(qual) + ' · ' + checked + ' · Haftpflicht: ' + (r.insurance_verified ? '✓' : '–') +
+      ' · ' + (r.price_15min_cents / 100).toFixed(2).replace('.', ',') + ' € / 15 Min.</div></div>';
+    const btn = document.createElement('button');
+    btn.textContent = r.approved ? 'Sperren' : 'Freischalten';
+    btn.style.cssText = 'background:' + (r.approved ? 'transparent' : 'var(--orange)') + ';border:1px solid var(--orange);color:#fff;padding:8px 14px;border-radius:8px;font-weight:700;cursor:pointer;';
+    btn.onclick = async () => {
+      if (!r.approved && r.qualification !== 'hobby' && !r.qualification_verified &&
+          !confirm('Qualifikation ist noch nicht geprüft. In der App steht dann „Handwerker · Nachweis ausstehend“. Trotzdem freischalten?')) return;
+      try {
+        await callApi('expert_profiles', 'set_approved', { id: r.user_id, approved: !r.approved });
+        toast(r.approved ? 'Gesperrt.' : 'Freigeschaltet.');
+        loadExperts();
+      } catch (e) {
+        toast(e.message, true);
+      }
+    };
+    item.appendChild(btn);
+    box.appendChild(item);
   });
 }
 
@@ -730,7 +506,7 @@ function renderList(table) {
       '<button class="icon-btn" title="Bearbeiten">✎</button>' +
       '<button class="icon-btn danger" title="Löschen">🗑</button>';
     card.querySelector('b').textContent = row[cfg.titleField] || '(ohne Titel)';
-    card.querySelector('span').textContent = cfg.subtitleRender ? cfg.subtitleRender(row) : (row[cfg.subtitleField] || '');
+    card.querySelector('span').textContent = row[cfg.subtitleField] || '';
     const [editBtn, delBtn] = card.querySelectorAll('.icon-btn');
     editBtn.onclick = () => openEditor(table, row);
     delBtn.onclick = () => deleteRow(table, row);
@@ -738,284 +514,16 @@ function renderList(table) {
   });
 }
 
-
-function slugify(text) {
-  return String(text || '')
-    .toLowerCase()
-    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 40);
-}
-
-// Gewerke, die Nutzer frei eingetragen haben und die noch nicht in der Liste stehen
-async function loadTradeSuggestions() {
-  const box = document.getElementById('tradesSuggest');
-  if (!box) return;
-  try {
-    const body = await callApi('trades', 'suggestions');
-    const rows = body.data || [];
-    box.innerHTML = '';
-    if (!rows.length) {
-      box.innerHTML = '<div class="empty">Keine offenen Eingaben – alles, was Nutzer eintragen, steht schon in der Liste.</div>';
-      return;
-    }
-    rows.forEach((r) => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = '<div class="info"><b></b><span></span></div><button class="icon-btn" title="In die Liste übernehmen">＋</button>';
-      card.querySelector('b').textContent = r.label;
-      card.querySelector('span').textContent = r.count + (r.count === 1 ? ' Nutzer' : ' Nutzer') + ' · in „Sonstiges“ übernehmen';
-      card.querySelector('.icon-btn').onclick = async () => {
-        try {
-          await callApi('trades', 'upsert', { row: { id: slugify(r.label) || ('gewerk-' + Date.now()), label: r.label, category: 'Sonstiges', icon: 'construct', keywords: null, sort_order: 1100, active: true } });
-          toast('„' + r.label + '“ übernommen (Obergruppe & Icon kannst du unten ändern).');
-          loadTable('trades');
-          loadTradeSuggestions();
-        } catch (e) {
-          toast(e.message, true);
-        }
-      };
-      box.appendChild(card);
-    });
-  } catch (e) {
-    box.innerHTML = '<div class="empty">Konnte Eingaben nicht laden (' + e.message + ').</div>';
-  }
-}
-
-async function callImport(payload) {
-  const res = await fetch(IMPORT_PLACES_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(Object.assign({ password }, payload)),
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.error || ('Fehler ' + res.status));
-  return data;
-}
-
-const OSM_FILTERS = {
-  gastro: ['["amenity"~"^(restaurant|cafe|fast_food|biergarten|pub|ice_cream)$"]', '["shop"="bakery"]'],
-  unterkunft: ['["tourism"~"^(hotel|guest_house|apartment|hostel|motel|chalet)$"]'],
-  camping: ['["tourism"~"^(camp_site|caravan_site)$"]'],
-};
-const OSM_KIND = {
-  restaurant: 'Restaurant', cafe: 'Café', fast_food: 'Imbiss', biergarten: 'Biergarten', pub: 'Kneipe', ice_cream: 'Eisdiele',
-  hotel: 'Hotel', guest_house: 'Gästehaus / Pension', apartment: 'Ferienwohnung', hostel: 'Hostel', motel: 'Motel', chalet: 'Ferienhaus',
-  camp_site: 'Campingplatz', caravan_site: 'Wohnmobilstellplatz', bakery: 'Bäckerei',
-};
-const OVERPASS_MIRRORS = [
-  'https://overpass-api.de/api/interpreter',
-  'https://overpass.kumi.systems/api/interpreter',
-  'https://overpass.private.coffee/api/interpreter',
-];
-
-function osmCategory(t) {
-  if (t.tourism === 'camp_site' || t.tourism === 'caravan_site') return 'camping';
-  if (t.tourism) return 'unterkunft';
-  if (t.amenity === 'fast_food' || t.amenity === 'ice_cream' || t.shop === 'bakery') return 'imbiss';
-  return 'restaurant';
-}
-
-function osmToRow(el) {
-  const t = el.tags || {};
-  const name = (t.name || '').trim();
-  const lat = el.lat != null ? el.lat : (el.center && el.center.lat);
-  const lng = el.lon != null ? el.lon : (el.center && el.center.lon);
-  if (!name || lat == null || lng == null) return null;
-  const kind = OSM_KIND[t.amenity] || OSM_KIND[t.tourism] || OSM_KIND[t.shop] || '';
-  const desc = [kind, t.cuisine ? 'Küche: ' + t.cuisine.replace(/;/g, ', ').replace(/_/g, ' ') : '', t.opening_hours ? 'Öffnungszeiten: ' + t.opening_hours : ''].filter(Boolean).join(' · ');
-  return {
-    osm_id: el.type + '/' + el.id,
-    category: osmCategory(t),
-    name,
-    description: desc || null,
-    address: [t['addr:street'], t['addr:housenumber']].filter(Boolean).join(' ') || null,
-    plz: t['addr:postcode'] || null,
-    city: t['addr:city'] || t['addr:suburb'] || t['addr:place'] || null,
-    lat, lng,
-    phone: t.phone || t['contact:phone'] || null,
-    website: t.website || t['contact:website'] || null,
-  };
-}
-
-async function fetchOverpass(query, out) {
-  const failures = [];
-  for (const url of OVERPASS_MIRRORS) {
-    const host = new URL(url).host;
-    out.textContent = 'Frage ' + host + ' ab … (bis zu 90 Sekunden)';
-    try {
-      const ctrl = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), 90000);
-      const res = await fetch(url, { method: 'POST', body: 'data=' + encodeURIComponent(query), signal: ctrl.signal });
-      clearTimeout(timer);
-      if (res.ok) return await res.json();
-      failures.push(host + ': ' + res.status);
-    } catch (e) {
-      failures.push(host + ': ' + (e.name === 'AbortError' ? 'Zeitüberschreitung' : e.message));
-    }
-  }
-  throw new Error('OpenStreetMap nicht erreichbar (' + failures.join('; ') + ').');
-}
-
-async function importPlaces() {
-  const out = document.getElementById('impResult');
-  const plz = document.getElementById('impPlz').value.trim();
-  const radiusKm = Number(document.getElementById('impRadius').value);
-  const groups = [];
-  if (document.getElementById('impGastro').checked) groups.push('gastro');
-  if (document.getElementById('impUnterkunft').checked) groups.push('unterkunft');
-  if (document.getElementById('impCamping').checked) groups.push('camping');
-  if (!/^\d{5}$/.test(plz)) { toast('Bitte eine 5-stellige PLZ eingeben.', true); return; }
-  if (!groups.length) { toast('Bitte mindestens eine Kategorie wählen.', true); return; }
-  try {
-    out.textContent = 'Suche PLZ …';
-    const g = await geocodePlace({ plz, city: 'Deutschland' });
-    if (!g) { out.textContent = ''; toast('PLZ ' + plz + ' wurde nicht gefunden.', true); return; }
-    const around = '(around:' + Math.round(radiusKm * 1000) + ',' + g.lat + ',' + g.lng + ')';
-    const parts = groups.flatMap((k) => OSM_FILTERS[k].map((f) => 'nwr' + f + around + ';'));
-    const data = await fetchOverpass('[out:json][timeout:30];(' + parts.join('') + ');out center tags 600;', out);
-    const elements = data.elements || [];
-    const rows = elements.map(osmToRow).filter(Boolean);
-    if (!rows.length) { out.textContent = elements.length + ' Treffer, aber keine mit Namen und Position.'; return; }
-    out.textContent = 'Speichere ' + rows.length + ' Einträge …';
-    const r = await callImport({ action: 'insert_rows', rows, publish: document.getElementById('impPublish').checked });
-    out.textContent = r.inserted + (document.getElementById('impPublish').checked ? ' neue Einträge veröffentlicht (' : ' neue Entwürfe angelegt (') + elements.length + ' gefunden, ' + r.skipped_existing + ' schon vorhanden)' + (elements.length >= 600 ? ' – Ergebnis war begrenzt, ggf. kleineren Umkreis wählen.' : '.');
-    toast('Import fertig.');
-    await loadTable('places');
-  } catch (e) {
-    out.textContent = '';
-    toast(e.message, true);
-  }
-}
-
-
-const BULK_TILES = [[51.25,9.6,51.45,9.9],[51.25,9.9,51.45,10.2],[51.25,10.2,51.45,10.5],[51.25,10.5,51.45,10.8],[51.45,7.2,51.65,7.5],[51.45,9.3,51.65,9.6],[51.45,9.6,51.65,9.9],[51.45,9.9,51.65,10.2],[51.45,10.2,51.65,10.5],[51.45,10.5,51.65,10.8],[51.45,10.8,51.65,11.1],[51.65,9.0,51.85,9.3],[51.65,9.3,51.85,9.6],[51.65,9.6,51.85,9.9],[51.65,9.9,51.85,10.2],[51.65,10.2,51.85,10.5],[51.65,10.5,51.85,10.8],[51.65,10.8,51.85,11.1],[51.65,11.1,51.85,11.4],[51.85,9.0,52.05,9.3],[51.85,9.3,52.05,9.6],[51.85,9.6,52.05,9.9],[51.85,9.9,52.05,10.2],[51.85,10.2,52.05,10.5],[51.85,10.5,52.05,10.8],[51.85,10.8,52.05,11.1],[51.85,11.1,52.05,11.4],[52.05,7.5,52.25,7.8],[52.05,7.8,52.25,8.1],[52.05,8.1,52.25,8.4],[52.05,9.0,52.25,9.3],[52.05,9.3,52.25,9.6],[52.05,9.6,52.25,9.9],[52.05,9.9,52.25,10.2],[52.05,10.2,52.25,10.5],[52.05,10.5,52.25,10.8],[52.05,10.8,52.25,11.1],[52.25,6.6,52.45,6.9],[52.25,6.9,52.45,7.2],[52.25,7.5,52.45,7.8],[52.25,7.8,52.45,8.1],[52.25,8.1,52.45,8.4],[52.25,8.4,52.45,8.7],[52.25,8.7,52.45,9.0],[52.25,9.0,52.45,9.3],[52.25,9.3,52.45,9.6],[52.25,9.6,52.45,9.9],[52.25,9.9,52.45,10.2],[52.25,10.2,52.45,10.5],[52.25,10.5,52.45,10.8],[52.25,10.8,52.45,11.1],[52.45,6.6,52.65,6.9],[52.45,6.9,52.65,7.2],[52.45,7.2,52.65,7.5],[52.45,7.5,52.65,7.8],[52.45,7.8,52.65,8.1],[52.45,8.1,52.65,8.4],[52.45,8.4,52.65,8.7],[52.45,8.7,52.65,9.0],[52.45,9.0,52.65,9.3],[52.45,9.3,52.65,9.6],[52.45,9.6,52.65,9.9],[52.45,9.9,52.65,10.2],[52.45,10.2,52.65,10.5],[52.45,10.5,52.65,10.8],[52.45,10.8,52.65,11.1],[52.45,11.1,52.65,11.4],[52.65,6.9,52.85,7.2],[52.65,7.2,52.85,7.5],[52.65,7.5,52.85,7.8],[52.65,7.8,52.85,8.1],[52.65,8.1,52.85,8.4],[52.65,8.4,52.85,8.7],[52.65,8.7,52.85,9.0],[52.65,9.0,52.85,9.3],[52.65,9.3,52.85,9.6],[52.65,9.6,52.85,9.9],[52.65,9.9,52.85,10.2],[52.65,10.2,52.85,10.5],[52.65,10.5,52.85,10.8],[52.65,10.8,52.85,11.1],[52.65,11.1,52.85,11.4],[52.65,11.4,52.85,11.7],[52.85,7.2,53.05,7.5],[52.85,7.5,53.05,7.8],[52.85,7.8,53.05,8.1],[52.85,8.1,53.05,8.4],[52.85,8.4,53.05,8.7],[52.85,8.7,53.05,9.0],[52.85,9.0,53.05,9.3],[52.85,9.3,53.05,9.6],[52.85,9.6,53.05,9.9],[52.85,9.9,53.05,10.2],[52.85,10.2,53.05,10.5],[52.85,10.5,53.05,10.8],[52.85,10.8,53.05,11.1],[52.85,11.1,53.05,11.4],[52.85,11.4,53.05,11.7],[53.05,7.2,53.25,7.5],[53.05,7.5,53.25,7.8],[53.05,7.8,53.25,8.1],[53.05,8.1,53.25,8.4],[53.05,8.4,53.25,8.7],[53.05,8.7,53.25,9.0],[53.05,9.0,53.25,9.3],[53.05,9.3,53.25,9.6],[53.05,9.6,53.25,9.9],[53.05,9.9,53.25,10.2],[53.05,10.2,53.25,10.5],[53.05,10.5,53.25,10.8],[53.05,10.8,53.25,11.1],[53.05,11.1,53.25,11.4],[53.05,11.4,53.25,11.7],[53.25,6.9,53.45,7.2],[53.25,7.2,53.45,7.5],[53.25,7.5,53.45,7.8],[53.25,7.8,53.45,8.1],[53.25,8.1,53.45,8.4],[53.25,8.4,53.45,8.7],[53.25,8.7,53.45,9.0],[53.25,9.0,53.45,9.3],[53.25,9.3,53.45,9.6],[53.25,9.6,53.45,9.9],[53.25,9.9,53.45,10.2],[53.25,10.2,53.45,10.5],[53.25,10.5,53.45,10.8],[53.25,10.8,53.45,11.1],[53.45,6.6,53.65,6.9],[53.45,6.9,53.65,7.2],[53.45,7.2,53.65,7.5],[53.45,7.5,53.65,7.8],[53.45,7.8,53.65,8.1],[53.45,8.1,53.65,8.4],[53.45,8.4,53.65,8.7],[53.45,8.7,53.65,9.0],[53.45,9.0,53.65,9.3],[53.45,9.3,53.65,9.6],[53.45,9.6,53.65,9.9],[53.45,9.9,53.65,10.2],[53.45,10.2,53.65,10.5],[53.45,10.5,53.65,10.8],[53.65,6.9,53.85,7.2],[53.65,7.2,53.85,7.5],[53.65,7.5,53.85,7.8],[53.65,7.8,53.85,8.1],[53.65,8.4,53.85,8.7],[53.65,8.7,53.85,9.0],[53.65,9.0,53.85,9.3],[53.65,9.3,53.85,9.6],[53.85,8.4,54.05,8.7],[53.85,8.7,54.05,9.0],[53.85,9.0,54.05,9.3],[53.85,9.3,54.05,9.6]];
-let bulkRunning = false;
-let bulkStopFlag = false;
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-function bulkDone() {
-  try { return JSON.parse(localStorage.getItem('ht_bulk_done') || '[]'); } catch (e) { return []; }
-}
-function bulkSetDone(list) {
-  try { localStorage.setItem('ht_bulk_done', JSON.stringify(list)); } catch (e) {}
-}
-function bulkStop() { bulkStopFlag = true; }
-function bulkReset() {
-  if (bulkRunning) { toast('Läuft gerade – erst Stopp drücken.', true); return; }
-  if (!confirm('Fortschritt des Sammelimports zurücksetzen?')) return;
-  bulkSetDone([]);
-  document.getElementById('bulkResult').textContent = 'Fortschritt zurückgesetzt.';
-}
-
-async function bulkTile(bbox, groups, depth, stats) {
-  const [s, w, n, e] = bbox;
-  const box = '(' + s + ',' + w + ',' + n + ',' + e + ')';
-  const parts = groups.flatMap((k) => OSM_FILTERS[k].map((f) => 'nwr' + f + box + ';'));
-  const CAP = 2500;
-  const dummy = { textContent: '' };
-  const data = await fetchOverpass('[out:json][timeout:60];(' + parts.join('') + ');out center tags ' + CAP + ';', dummy);
-  const elements = data.elements || [];
-  if (elements.length >= CAP && depth < 3) {
-    const mLat = (s + n) / 2, mLng = (w + e) / 2;
-    for (const sub of [[s, w, mLat, mLng], [s, mLng, mLat, e], [mLat, w, n, mLng], [mLat, mLng, n, e]]) {
-      if (bulkStopFlag) return;
-      await sleep(8000);
-      await bulkTile(sub, groups, depth + 1, stats);
-    }
-    return;
-  }
-  const rows = elements.map(osmToRow).filter(Boolean);
-  stats.found += elements.length;
-  const publish = document.getElementById('impPublish').checked;
-  for (let i = 0; i < rows.length; i += 500) {
-    const r = await callImport({ action: 'insert_rows', rows: rows.slice(i, i + 500), publish });
-    stats.inserted += r.inserted;
-  }
-}
-
-async function bulkImport() {
-  if (bulkRunning) return;
-  const out = document.getElementById('bulkResult');
-  const groups = [];
-  if (document.getElementById('impGastro').checked) groups.push('gastro');
-  if (document.getElementById('impUnterkunft').checked) groups.push('unterkunft');
-  if (document.getElementById('impCamping').checked) groups.push('camping');
-  if (!groups.length) { toast('Bitte oben mindestens eine Kategorie wählen.', true); return; }
-  const publish = document.getElementById('impPublish').checked;
-  if (!confirm('Sammelimport für ganz Niedersachsen & Bremen starten?\n\n' + (publish ? 'Die Einträge werden SOFORT veröffentlicht.' : 'Die Einträge werden als ENTWURF angelegt.') + '\nDas Fenster muss 30–60 Minuten offen bleiben.')) return;
-  bulkRunning = true; bulkStopFlag = false;
-  const doneList = bulkDone();
-  const stats = { found: 0, inserted: 0, failed: [] };
-  const t0 = Date.now();
-  for (let i = 0; i < BULK_TILES.length; i++) {
-    if (bulkStopFlag) break;
-    if (doneList.includes(i)) continue;
-    out.textContent = 'Kachel ' + (i + 1) + ' von ' + BULK_TILES.length + ' … bisher ' + stats.inserted + ' neue Einträge (' + Math.round((Date.now() - t0) / 60000) + ' Min.)';
-    let ok = false;
-    const waits = [30, 60, 120, 180];
-    for (let attempt = 0; attempt <= waits.length && !ok && !bulkStopFlag; attempt++) {
-      try {
-        await bulkTile(BULK_TILES[i], groups, 0, stats);
-        ok = true;
-      } catch (e) {
-        if (attempt === waits.length) { out.textContent = 'Kachel ' + (i + 1) + ' übersprungen: ' + e.message; break; }
-        // Overpass drosselt (429) oder ist überlastet (504): länger warten, dann erneut
-        for (let sec = waits[attempt]; sec > 0 && !bulkStopFlag; sec--) {
-          out.textContent = 'Kachel ' + (i + 1) + ': OpenStreetMap ist gerade ausgelastet – neuer Versuch in ' + sec + ' s (Versuch ' + (attempt + 2) + ' von ' + (waits.length + 1) + ') …';
-          await sleep(1000);
-        }
-      }
-    }
-    if (ok) { doneList.push(i); bulkSetDone(doneList); }
-    else if (!bulkStopFlag) stats.failed.push(i + 1);
-    await sleep(10000);
-  }
-  bulkRunning = false;
-  const left = BULK_TILES.length - bulkDone().length;
-  out.textContent = (bulkStopFlag ? 'Gestoppt. ' : 'Fertig. ') + stats.inserted + ' neue Einträge angelegt (' + stats.found + ' gefunden). ' +
-    (left > 0 ? left + ' Kacheln noch offen – erneut starten setzt fort.' : 'Alle Kacheln erledigt.') +
-    (stats.failed.length ? ' Fehlgeschlagen: ' + stats.failed.join(', ') + '.' : '');
-  await loadTable('places');
-}
-
-async function placesBulk(action) {
-  const msg = action === 'publish_drafts' ? 'Alle importierten Entwürfe in der App sichtbar machen?' : 'Alle importierten, noch nicht freigegebenen Entwürfe löschen?';
-  if (!confirm(msg)) return;
-  try {
-    const r = await callImport({ action });
-    toast((r.published != null ? r.published + ' freigegeben.' : r.deleted + ' gelöscht.'));
-    await loadTable('places');
-  } catch (e) { toast(e.message, true); }
-}
-
 async function deleteRow(table, row) {
   const cfg = FIELD_CONFIG[table];
   if (!confirm('"' + (row[cfg.titleField] || '') + '" wirklich löschen?')) return;
   try {
-    await callApi(table, 'delete', { id: row[cfg.idField] });
+    await callApi(table, 'delete', { id: row.id });
     toast('Gelöscht.');
     loadTable(table);
   } catch (e) {
     toast(e.message, true);
   }
-}
-
-// Adresse -> Koordinaten (OpenStreetMap Nominatim, kostenlos, ~1 Anfrage/Sek.)
-async function geocodePlace(row) {
-  const queries = [
-    [row.address, row.plz, row.city],
-    [row.plz, row.city],
-  ].map((parts) => parts.filter(Boolean).join(', ')).filter((q) => q);
-  for (const q of queries) {
-    const url = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=de,at,ch&q=' + encodeURIComponent(q);
-    const res = await fetch(url, { headers: { 'Accept-Language': 'de' } });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    if (data && data[0]) return { lat: Number(data[0].lat), lng: Number(data[0].lon) };
-  }
-  return null;
 }
 
 function openEditor(table, existing) {
@@ -1043,43 +551,8 @@ function openEditor(table, existing) {
         return '<option value="' + val + '" ' + sel + '>' + lbl + '</option>';
       }).join('');
       row.innerHTML = '<label>' + f.label + '</label><select data-field="' + f.key + '">' + opts + '</select>';
-    } else if (f.type === 'select-editable') {
-      const opts = f.options.map((o) => {
-        const [val, lbl] = Array.isArray(o) ? o : [o, o];
-        return '<option value="' + val + '">' + lbl + '</option>';
-      }).join('') + '<option value="__custom__">Eigene Kategorie...</option>';
-      row.innerHTML =
-        '<label>' + f.label + '</label>' +
-        '<select class="select-editable-select">' + opts + '</select>' +
-        '<input type="text" class="select-editable-custom" placeholder="Eigene Kategorie eingeben" style="display:none; margin-top:8px;">' +
-        '<input type="hidden" data-field="' + f.key + '">';
-    } else if (f.type === 'textarea' || f.type === 'json') {
-      row.innerHTML = '<label>' + f.label + '</label><textarea rows="' + (f.type === 'json' ? 4 : 2) + '" data-field="' + f.key + '"' + (f.type === 'json' ? ' style="font-family: ui-monospace, monospace;"' : '') + '></textarea>';
-    } else if (f.type === 'logo-picker') {
-      row.innerHTML =
-        '<label>' + f.label + '</label>' +
-        '<div class="logo-picker-preview"><img alt=""><span class="logo-picker-empty">Kein Logo gewählt</span></div>' +
-        '<div class="logo-picker-actions">' +
-          '<button type="button" class="btn btn-secondary logo-picker-choose">Logo wählen</button>' +
-          '<button type="button" class="btn btn-secondary logo-picker-clear">Entfernen</button>' +
-        '</div>' +
-        '<input type="hidden" data-field="' + f.key + '">';
-    } else if (f.type === 'icon-picker') {
-      row.innerHTML =
-        '<label>' + f.label + '</label>' +
-        '<div class="icon-picker-row">' +
-          '<div class="icon-picker-preview"><span class="icon-glyph-preview"></span></div>' +
-          '<input type="text" data-field="' + f.key + '" placeholder="z. B. bulb-outline oder mci:hammer-wrench">' +
-          '<button type="button" class="btn btn-secondary icon-picker-choose">Icon wählen</button>' +
-        '</div>';
-    } else if (f.type === 'color-picker') {
-      row.innerHTML =
-        '<label>' + f.label + '</label>' +
-        '<div class="color-picker-row">' +
-          '<input type="color" class="color-swatch" value="#101F30">' +
-          '<input type="text" data-field="' + f.key + '" placeholder="z. B. FF8C00 (leer = Standard)">' +
-          '<button type="button" class="btn btn-secondary color-clear-btn">Leeren</button>' +
-        '</div>';
+    } else if (f.type === 'textarea') {
+      row.innerHTML = '<label>' + f.label + '</label><textarea rows="2" data-field="' + f.key + '"></textarea>';
     } else {
       row.innerHTML = '<label>' + f.label + '</label><input type="' + (f.type === 'number' ? 'number' : 'text') + '" data-field="' + f.key + '">';
     }
@@ -1093,111 +566,7 @@ function openEditor(table, existing) {
 
     if (f.type !== 'checkbox') {
       const input = row.querySelector('[data-field="' + f.key + '"]');
-      if (f.type === 'json') {
-        // Wert liegt schon als echtes JS-Objekt/Wert vor (jsonb-Spalte) --
-        // hübsch formatiert als JSON-Text anzeigen, oder ein leeres Beispiel
-        // beim Neuanlegen.
-        input.value = existing ? JSON.stringify(value, null, 2) : '""';
-      } else {
-        input.value = value != null ? value : '';
-      }
-      if (f.disabledOnEdit && existing) input.disabled = true;
-    }
-
-    if (f.type === 'logo-picker') {
-      const hidden = row.querySelector('[data-field="' + f.key + '"]');
-      const img = row.querySelector('.logo-picker-preview img');
-      const empty = row.querySelector('.logo-picker-empty');
-      const syncPreview = () => {
-        if (hidden.value) {
-          img.src = hidden.value;
-          img.style.display = 'inline-block';
-          empty.style.display = 'none';
-        } else {
-          img.style.display = 'none';
-          empty.style.display = 'inline';
-        }
-      };
-      syncPreview();
-      row.querySelector('.logo-picker-choose').onclick = () => {
-        openLogoPickerModal((chosenUrl) => {
-          hidden.value = chosenUrl;
-          syncPreview();
-        });
-      };
-      row.querySelector('.logo-picker-clear').onclick = () => {
-        hidden.value = '';
-        syncPreview();
-      };
-    }
-
-    if (f.type === 'icon-picker') {
-      const textInput = row.querySelector('[data-field="' + f.key + '"]');
-      const previewEl = row.querySelector('.icon-glyph-preview');
-      const sync = () => updateIconPreview(previewEl, textInput.value.trim());
-      sync();
-      textInput.addEventListener('input', sync);
-      row.querySelector('.icon-picker-choose').onclick = () => {
-        openIconPickerModal((rawName) => {
-          textInput.value = rawName;
-          sync();
-        });
-      };
-    }
-
-    if (f.type === 'color-picker') {
-      const textInput = row.querySelector('[data-field="' + f.key + '"]');
-      const swatch = row.querySelector('.color-swatch');
-      const sync = () => {
-        const hex = normalizeHex(textInput.value);
-        swatch.value = hex ? '#' + hex : '#101F30';
-      };
-      sync();
-      textInput.addEventListener('input', sync);
-      swatch.addEventListener('input', () => {
-        textInput.value = swatch.value.replace('#', '').toUpperCase();
-      });
-      row.querySelector('.color-clear-btn').onclick = () => {
-        textInput.value = '';
-        sync();
-      };
-    }
-
-    if (f.type === 'select-editable') {
-      const hidden = row.querySelector('[data-field="' + f.key + '"]');
-      const selectEl = row.querySelector('.select-editable-select');
-      const customInput = row.querySelector('.select-editable-custom');
-      const knownValues = f.options.map((o) => (Array.isArray(o) ? o[0] : o));
-
-      const applyFromHidden = () => {
-        const val = hidden.value || '';
-        if (val && !knownValues.includes(val)) {
-          selectEl.value = '__custom__';
-          customInput.style.display = 'block';
-          customInput.value = val;
-        } else {
-          selectEl.value = val || knownValues[0];
-          customInput.style.display = 'none';
-          customInput.value = '';
-          hidden.value = selectEl.value;
-        }
-      };
-      applyFromHidden();
-
-      selectEl.onchange = () => {
-        if (selectEl.value === '__custom__') {
-          customInput.style.display = 'block';
-          customInput.value = '';
-          customInput.focus();
-          hidden.value = '';
-        } else {
-          customInput.style.display = 'none';
-          hidden.value = selectEl.value;
-        }
-      };
-      customInput.oninput = () => {
-        hidden.value = customInput.value.trim();
-      };
+      input.value = value != null ? value : '';
     }
   });
 
@@ -1211,57 +580,22 @@ function openEditor(table, existing) {
 
   form.onsubmit = async (ev) => {
     ev.preventDefault();
-    const row = existing ? { [cfg.idField]: existing[cfg.idField] } : {};
-    let jsonError = null;
+    const row = existing ? { id: existing.id } : {};
     cfg.fields.forEach((f) => {
       const el = form.querySelector('[data-field="' + f.key + '"]');
       if (f.type === 'checkbox') {
         row[f.key] = el.checked;
       } else if (f.type === 'number') {
         row[f.key] = el.value === '' ? 0 : Number(el.value);
-      } else if (f.type === 'decimal') {
-        const v = el.value.trim().replace(',', '.');
-        row[f.key] = v === '' || isNaN(Number(v)) ? null : Number(v);
-      } else if (f.type === 'json') {
-        try {
-          row[f.key] = JSON.parse(el.value);
-        } catch (e) {
-          jsonError = 'Feld "' + f.label + '": kein gültiges JSON (' + e.message + ')';
-        }
-      } else if (f.type === 'logo-picker') {
-        row[f.key] = el.value || null;
       } else {
         row[f.key] = el.value;
       }
     });
-    if (jsonError) { toast(jsonError, true); return; }
-    if (table === 'trades') {
-      row.label = (row.label || '').trim();
-      row.icon = (row.icon || '').trim() || 'construct';
-      row.keywords = (row.keywords || '').trim() || null;
-      if (!row.id || !String(row.id).trim()) row.id = slugify(row.label);
-      if (!row.id) { toast('Bitte einen Namen eintragen.', true); return; }
-    }
-    if (table === 'places') {
-      for (const k of ['address', 'plz', 'city', 'phone', 'website', 'image_url', 'description']) {
-        if (typeof row[k] === 'string') row[k] = row[k].trim() || null;
-      }
-      if (row.lat == null || row.lng == null) {
-        try {
-          const g = await geocodePlace(row);
-          if (g) { row.lat = g.lat; row.lng = g.lng; }
-          else { toast('Adresse nicht gefunden – bitte Lat/Lng manuell eintragen (sonst erscheint der Eintrag nicht in der Umkreissuche).', true); }
-        } catch (e) {
-          toast('Geokodierung fehlgeschlagen: ' + e.message, true);
-        }
-      }
-    }
     try {
       await callApi(table, 'upsert', { row });
       toast('Gespeichert.');
       form.remove();
       loadTable(table);
-      if (table === 'trades') loadTradeSuggestions();
     } catch (e) {
       toast(e.message, true);
     }
@@ -1270,564 +604,6 @@ function openEditor(table, existing) {
   document.getElementById(containerId).appendChild(form);
   form.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
-
-// ---- Logo-Bibliothek ----
-
-function onLogoCategoryChange() {
-  const sel = document.getElementById('logoCategorySelect').value;
-  document.getElementById('logoCustomCategoryWrap').style.display = sel === '__custom__' ? 'block' : 'none';
-}
-
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result; // "data:image/png;base64,AAAA..."
-      const comma = result.indexOf(',');
-      resolve(comma >= 0 ? result.slice(comma + 1) : result);
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-// Aus einem Dateinamen einen brauchbaren Anzeigenamen machen, z. B.
-// "hammer_rot.png" -> "Hammer rot". Wird bei Mehrfachauswahl pro Datei genutzt.
-function nameFromFileName(fileName) {
-  const base = fileName.replace(/\.[^.]+$/, '');
-  const spaced = base.replace(/[-_]+/g, ' ').trim();
-  return spaced ? spaced.charAt(0).toUpperCase() + spaced.slice(1) : fileName;
-}
-
-// Die App (React Native) kann SVG-Dateien nicht anzeigen -- die eingebaute
-// <Image>-Komponente stellt nur Raster-Formate (PNG/JPG/WebP) dar. Damit
-// heruntergeladene SVG-Icon-Pakete trotzdem als Logo funktionieren, wird
-// jede SVG-Datei hier im Browser automatisch in ein PNG umgewandelt, bevor
-// sie hochgeladen wird -- der Kunde muss nichts manuell konvertieren.
-function svgFileToPngBase64(file, size) {
-  size = size || 512;
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      let svgText = String(reader.result);
-      // Viele Icon-Sets (u. a. Ionicons) nutzen fill/stroke="currentColor" und
-      // verlassen sich auf die umgebende Seite für die Farbe. Als eigenständige
-      // Bild-Datei geladen gibt es diesen Kontext nicht -- ohne Fallback-Farbe
-      // könnte das Icon unsichtbar (transparent) werden. Deshalb Schwarz erzwingen.
-      if (/<svg[^>]*\sstyle=["']/.test(svgText)) {
-        svgText = svgText.replace(/(<svg[^>]*\sstyle=["'])/, '$1color:#000000;');
-      } else {
-        svgText = svgText.replace(/<svg/, '<svg style="color:#000000"');
-      }
-      const svgBlob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
-      const url = URL.createObjectURL(svgBlob);
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = size;
-        canvas.height = size;
-        const ctx = canvas.getContext('2d');
-        const pad = size * 0.08; // etwas Rand, damit nichts am Bildrand klebt
-        ctx.drawImage(img, pad, pad, size - pad * 2, size - pad * 2);
-        URL.revokeObjectURL(url);
-        const dataUrl = canvas.toDataURL('image/png');
-        const comma = dataUrl.indexOf(',');
-        resolve(comma >= 0 ? dataUrl.slice(comma + 1) : dataUrl);
-      };
-      img.onerror = () => {
-        URL.revokeObjectURL(url);
-        reject(new Error('SVG konnte nicht gerendert werden.'));
-      };
-      img.src = url;
-    };
-    reader.onerror = reject;
-    reader.readAsText(file);
-  });
-}
-
-function isSvgFile(file) {
-  return file.type === 'image/svg+xml' || /\.svg$/i.test(file.name);
-}
-
-document.getElementById('logoUploadForm').onsubmit = async (ev) => {
-  ev.preventDefault();
-  const fileInput = document.getElementById('logoFileInput');
-  const files = Array.from(fileInput.files || []);
-  const manualName = document.getElementById('logoNameInput').value.trim();
-  const catSelect = document.getElementById('logoCategorySelect').value;
-  const category = catSelect === '__custom__'
-    ? (document.getElementById('logoCustomCategoryInput').value.trim() || 'sonstiges')
-    : catSelect;
-  const tags = document.getElementById('logoTagsInput').value
-    .split(',').map((t) => t.trim().toLowerCase()).filter(Boolean);
-
-  if (!files.length) { toast('Bitte mindestens eine Bild-Datei wählen.', true); return; }
-  if (files.length === 1 && !manualName) {
-    toast('Bitte einen Namen eingeben (oder mehrere Dateien für automatische Namen wählen).', true);
-    return;
-  }
-
-  const submitBtn = document.querySelector('#logoUploadForm button[type="submit"]');
-  submitBtn.disabled = true;
-  let done = 0;
-  let failed = 0;
-
-  for (const file of files) {
-    const name = (files.length === 1 && manualName) ? manualName : nameFromFileName(file.name);
-    submitBtn.textContent = 'Lade hoch (' + (done + failed + 1) + '/' + files.length + ')...';
-    try {
-      let fileBase64, fileName, contentType;
-      if (isSvgFile(file)) {
-        fileBase64 = await svgFileToPngBase64(file);
-        fileName = file.name.replace(/\.svg$/i, '') + '.png';
-        contentType = 'image/png';
-      } else {
-        fileBase64 = await fileToBase64(file);
-        fileName = file.name;
-        contentType = file.type || 'image/png';
-      }
-      await callLogosApi('upload', {
-        name,
-        category,
-        tags,
-        fileName,
-        contentType,
-        fileBase64,
-      });
-      done++;
-    } catch (e) {
-      failed++;
-    }
-  }
-
-  submitBtn.disabled = false;
-  submitBtn.textContent = 'Hochladen';
-
-  if (failed) {
-    toast(done + ' hochgeladen, ' + failed + ' fehlgeschlagen.', true);
-  } else {
-    toast(done + (done === 1 ? ' Logo hochgeladen.' : ' Logos hochgeladen.'));
-  }
-  document.getElementById('logoUploadForm').reset();
-  document.getElementById('logoCustomCategoryWrap').style.display = 'none';
-  loadLogos();
-};
-
-// Einmaliger Bulk-Import bekannter Marken-Logos (Simple Icons, CC0-Icon-Set)
-// in die Logo-Bibliothek. Lädt die vorbereitete Datei simple-icons-import.json
-// (liegt neben dieser Seite) und lädt jedes Logo über die admin-logos-Funktion
-// hoch -- mit ein paar Uploads gleichzeitig, damit es nicht Stunden dauert.
-async function importSimpleIcons() {
-  const btn = document.getElementById('simpleIconsImportBtn');
-  btn.disabled = true;
-  const originalText = btn.textContent;
-
-  try {
-    btn.textContent = 'Lade Liste...';
-    const res = await fetch('simple-icons-import.json');
-    if (!res.ok) throw new Error('simple-icons-import.json nicht gefunden (Status ' + res.status + ')');
-    const allEntries = await res.json();
-
-    const existing = new Set(
-      (dataCache.logos || [])
-        .filter((l) => l.category === 'marken')
-        .map((l) => l.name)
-    );
-    const entries = allEntries.filter((e) => !existing.has(e.name));
-
-    if (!entries.length) {
-      toast('Alle Marken-Logos sind schon importiert.');
-      return;
-    }
-    if (!confirm(entries.length + ' Marken-Logos werden jetzt importiert. Das dauert ein paar Minuten -- diesen Tab bitte offen lassen. Fortfahren?')) {
-      return;
-    }
-
-    let done = 0;
-    let failed = 0;
-    const CONCURRENCY = 6;
-    let nextIndex = 0;
-
-    const updateProgress = () => {
-      btn.textContent = 'Importiere (' + (done + failed) + '/' + entries.length + ')...';
-    };
-    updateProgress();
-
-    async function worker() {
-      while (nextIndex < entries.length) {
-        const entry = entries[nextIndex++];
-        try {
-          await callLogosApi('upload', entry);
-          done++;
-        } catch (e) {
-          failed++;
-        }
-        updateProgress();
-      }
-    }
-
-    await Promise.all(Array.from({ length: CONCURRENCY }, worker));
-
-    await loadLogos();
-    if (failed) {
-      toast(done + ' Marken-Logos importiert, ' + failed + ' fehlgeschlagen (nochmal klicken zum Wiederholen).', true);
-    } else {
-      toast(done + ' Marken-Logos importiert.');
-    }
-  } catch (e) {
-    toast('Import fehlgeschlagen: ' + e.message, true);
-  } finally {
-    btn.disabled = false;
-    btn.textContent = originalText;
-  }
-}
-
-function renderLogoCategoryFilters() {
-  const cats = Array.from(new Set((dataCache.logos || []).map((l) => l.category || 'sonstiges'))).sort();
-  const all = ['alle'].concat(cats);
-  const container = document.getElementById('logoCategoryFilters');
-  container.innerHTML = '';
-  all.forEach((c) => {
-    const el = document.createElement('div');
-    el.className = 'tab' + (logoCategoryFilter === c ? ' active' : '');
-    el.textContent = c === 'alle' ? 'Alle' : c;
-    el.onclick = () => { logoCategoryFilter = c; renderLogoCategoryFilters(); renderLogoGrid(); };
-    container.appendChild(el);
-  });
-}
-
-function filterLogos(list, query, category) {
-  const q = (query || '').trim().toLowerCase();
-  return list.filter((l) => {
-    if (category && category !== 'alle' && (l.category || 'sonstiges') !== category) return false;
-    if (!q) return true;
-    const haystack = (l.name + ' ' + (l.tags || []).join(' ')).toLowerCase();
-    return haystack.includes(q);
-  });
-}
-
-function renderLogoGrid() {
-  const grid = document.getElementById('logoGrid');
-  if (!grid) return;
-  const q = document.getElementById('logoSearchInput').value;
-  const rows = filterLogos(dataCache.logos || [], q, logoCategoryFilter);
-  grid.innerHTML = '';
-  if (!rows.length) {
-    grid.innerHTML = '<div class="empty">Keine Logos gefunden.</div>';
-    return;
-  }
-  rows.forEach((row) => {
-    const card = document.createElement('div');
-    card.className = 'logo-card';
-    card.innerHTML =
-      '<button class="logo-del" title="Löschen">✕</button>' +
-      '<img src="' + row.url + '" alt="">' +
-      '<div class="logo-name"></div>' +
-      '<div class="logo-cat"></div>';
-    card.querySelector('.logo-name').textContent = row.name;
-    card.querySelector('.logo-cat').textContent = row.category;
-    card.querySelector('.logo-del').onclick = () => deleteLogo(row);
-    grid.appendChild(card);
-  });
-}
-
-async function deleteLogo(row) {
-  if (!confirm('Logo "' + row.name + '" wirklich löschen?')) return;
-  try {
-    await callLogosApi('delete', { id: row.id });
-    toast('Gelöscht.');
-    loadLogos();
-  } catch (e) {
-    toast(e.message, true);
-  }
-}
-
-// ---- Icon-Auswahl (statt blind Ionicons/MDI-Namen eintippen) ----
-//
-// Kuratierte Auswahl gängiger Icons -- Ionicons (family 'ion', ohne Prefix
-// gespeichert) und MaterialCommunityIcons/MDI (family 'mdi', mit "mci:"
-// Prefix gespeichert, genau wie es die App erwartet). Für die Vorschau
-// werden dieselben Icon-Sets wie in der App per CDN eingebunden (siehe
-// <head>), damit es exakt so aussieht wie später in Handwerker Treff.
-const ICON_LIBRARY = [
-  // Werkzeug/Handwerk (Ionicons)
-  { name: 'hammer-outline', family: 'ion' },
-  { name: 'hammer', family: 'ion' },
-  { name: 'construct-outline', family: 'ion' },
-  { name: 'construct', family: 'ion' },
-  { name: 'build-outline', family: 'ion' },
-  { name: 'build', family: 'ion' },
-  { name: 'settings-outline', family: 'ion' },
-  // Werkzeug/Handwerk (MDI -- mehr Auswahl als Ionicons)
-  { name: 'hammer', family: 'mdi' },
-  { name: 'hammer-wrench', family: 'mdi' },
-  { name: 'wrench', family: 'mdi' },
-  { name: 'screwdriver', family: 'mdi' },
-  { name: 'toolbox', family: 'mdi' },
-  { name: 'ladder', family: 'mdi' },
-  { name: 'hard-hat', family: 'mdi' },
-  { name: 'account-hard-hat', family: 'mdi' },
-  { name: 'saw-blade', family: 'mdi' },
-  { name: 'shovel', family: 'mdi' },
-  { name: 'pipe-wrench', family: 'mdi' },
-  { name: 'pipe', family: 'mdi' },
-  { name: 'ruler', family: 'mdi' },
-  { name: 'ruler-square', family: 'mdi' },
-  { name: 'tape-measure', family: 'mdi' },
-  { name: 'car-wrench', family: 'mdi' },
-  // Fahrzeuge
-  { name: 'car-outline', family: 'ion' },
-  { name: 'car-sport-outline', family: 'ion' },
-  { name: 'bicycle-outline', family: 'ion' },
-  { name: 'bus-outline', family: 'ion' },
-  { name: 'boat-outline', family: 'ion' },
-  { name: 'airplane-outline', family: 'ion' },
-  { name: 'train-outline', family: 'ion' },
-  { name: 'truck', family: 'mdi' },
-  { name: 'truck-fast', family: 'mdi' },
-  { name: 'motorbike', family: 'mdi' },
-  { name: 'bike', family: 'mdi' },
-  // Haus/Zuhause
-  { name: 'home-outline', family: 'ion' },
-  { name: 'home', family: 'ion' },
-  { name: 'business-outline', family: 'ion' },
-  { name: 'home-city', family: 'mdi' },
-  { name: 'garage', family: 'mdi' },
-  // Termine/Events
-  { name: 'calendar-outline', family: 'ion' },
-  { name: 'calendar', family: 'ion' },
-  { name: 'time-outline', family: 'ion' },
-  { name: 'alarm-outline', family: 'ion' },
-  { name: 'calendar-star', family: 'mdi' },
-  // Kommunikation
-  { name: 'chatbubbles-outline', family: 'ion' },
-  { name: 'chatbubble-outline', family: 'ion' },
-  { name: 'mail-outline', family: 'ion' },
-  { name: 'call-outline', family: 'ion' },
-  { name: 'megaphone-outline', family: 'ion' },
-  { name: 'forum', family: 'mdi' },
-  { name: 'account-group', family: 'mdi' },
-  // Hinweis/Status
-  { name: 'information-circle-outline', family: 'ion' },
-  { name: 'alert-circle-outline', family: 'ion' },
-  { name: 'warning-outline', family: 'ion' },
-  { name: 'checkmark-circle-outline', family: 'ion' },
-  { name: 'close-circle-outline', family: 'ion' },
-  { name: 'help-circle-outline', family: 'ion' },
-  // Sonstiges/Beliebt
-  { name: 'star-outline', family: 'ion' },
-  { name: 'star', family: 'ion' },
-  { name: 'heart-outline', family: 'ion' },
-  { name: 'heart', family: 'ion' },
-  { name: 'gift-outline', family: 'ion' },
-  { name: 'trophy-outline', family: 'ion' },
-  { name: 'ribbon-outline', family: 'ion' },
-  { name: 'thumbs-up-outline', family: 'ion' },
-  { name: 'flame-outline', family: 'ion' },
-  { name: 'flash-outline', family: 'ion' },
-  { name: 'bulb-outline', family: 'ion' },
-  { name: 'bulb', family: 'ion' },
-  { name: 'leaf-outline', family: 'ion' },
-  { name: 'sunny-outline', family: 'ion' },
-  { name: 'rainy-outline', family: 'ion' },
-  { name: 'snow-outline', family: 'ion' },
-  { name: 'lightbulb-on', family: 'mdi' },
-  { name: 'lightbulb-on-outline', family: 'mdi' },
-  { name: 'weather-sunny', family: 'mdi' },
-  { name: 'leaf', family: 'mdi' },
-  { name: 'recycle', family: 'mdi' },
-  { name: 'broom', family: 'mdi' },
-  { name: 'trash-can', family: 'mdi' },
-  { name: 'fire', family: 'mdi' },
-  { name: 'lightning-bolt', family: 'mdi' },
-  { name: 'power-plug', family: 'mdi' },
-  // Einkauf/Geld
-  { name: 'cart-outline', family: 'ion' },
-  { name: 'pricetag-outline', family: 'ion' },
-  { name: 'pricetags-outline', family: 'ion' },
-  { name: 'cash-outline', family: 'ion' },
-  { name: 'card-outline', family: 'ion' },
-  { name: 'cash', family: 'mdi' },
-  { name: 'percent', family: 'mdi' },
-  { name: 'tag', family: 'mdi' },
-  // Dokumente/Wissen
-  { name: 'newspaper-outline', family: 'ion' },
-  { name: 'book-outline', family: 'ion' },
-  { name: 'document-text-outline', family: 'ion' },
-  { name: 'clipboard-outline', family: 'ion' },
-  { name: 'trophy', family: 'mdi' },
-  { name: 'school', family: 'mdi' },
-  { name: 'newspaper', family: 'mdi' },
-  { name: 'briefcase', family: 'mdi' },
-  { name: 'handshake', family: 'mdi' },
-  // Ort/Sicherheit
-  { name: 'location-outline', family: 'ion' },
-  { name: 'navigate-outline', family: 'ion' },
-  { name: 'map-outline', family: 'ion' },
-  { name: 'shield-checkmark-outline', family: 'ion' },
-  { name: 'lock-closed-outline', family: 'ion' },
-  { name: 'key-outline', family: 'ion' },
-  // Essen
-  { name: 'restaurant-outline', family: 'ion' },
-  { name: 'cafe-outline', family: 'ion' },
-  { name: 'pizza-outline', family: 'ion' },
-];
-
-function iconGlyphHtml(rawName) {
-  if (!rawName) return '';
-  if (rawName.startsWith('mci:')) {
-    return '<span class="mdi mdi-' + rawName.slice(4) + '"></span>';
-  }
-  return '<ion-icon name="' + rawName + '"></ion-icon>';
-}
-
-function updateIconPreview(previewEl, rawName) {
-  previewEl.innerHTML = rawName ? iconGlyphHtml(rawName) : '<span class="icon-glyph-empty">?</span>';
-}
-
-// Modal zum Auswählen eines Icons, genutzt vom "icon-picker"-Feld bei
-// Werbepartner und Tipps & Infos. onSelect(rawName) wird beim Klick auf ein
-// Icon aufgerufen -- rawName ist schon im richtigen Format ("bulb-outline"
-// bzw. "mci:hammer-wrench") zum direkten Speichern.
-function openIconPickerModal(onSelect) {
-  const overlay = document.createElement('div');
-  overlay.className = 'logo-picker-overlay';
-  overlay.innerHTML =
-    '<div class="logo-picker-modal">' +
-      '<div class="section-title" style="margin-top:0;">Icon wählen</div>' +
-      '<input type="text" class="search-input ip-search" placeholder="Suchen, z. B. hammer, auto, kalender">' +
-      '<div class="icon-picker-grid ip-grid"></div>' +
-      '<div class="hint" style="margin-top:10px;">Nicht gefunden? Auf <a class="hint-link" href="https://icons.expo.fyi" target="_blank">icons.expo.fyi</a> (Ionicons) oder <a class="hint-link" href="https://pictogrammers.com/library/mdi/" target="_blank">pictogrammers.com/library/mdi</a> (mit "mci:" davor) durchsuchen und den Namen ins Feld eintippen.</div>' +
-      '<div class="actions"><button type="button" class="btn btn-secondary ip-close">Schließen</button></div>' +
-    '</div>';
-  document.body.appendChild(overlay);
-
-  const search = overlay.querySelector('.ip-search');
-  const gridEl = overlay.querySelector('.ip-grid');
-
-  function renderGrid() {
-    const q = search.value.trim().toLowerCase();
-    const rows = ICON_LIBRARY.filter((i) => !q || i.name.toLowerCase().includes(q));
-    gridEl.innerHTML = '';
-    if (!rows.length) {
-      gridEl.innerHTML = '<div class="empty">Keine Icons gefunden.</div>';
-      return;
-    }
-    rows.forEach((icon) => {
-      const rawName = icon.family === 'mdi' ? 'mci:' + icon.name : icon.name;
-      const item = document.createElement('div');
-      item.className = 'icon-picker-item';
-      item.innerHTML = '<span class="icon-glyph">' + iconGlyphHtml(rawName) + '</span><span class="icon-picker-label"></span>';
-      item.querySelector('.icon-picker-label').textContent = icon.name;
-      item.onclick = () => { onSelect(rawName); overlay.remove(); };
-      gridEl.appendChild(item);
-    });
-  }
-
-  search.oninput = renderGrid;
-  overlay.querySelector('.ip-close').onclick = () => overlay.remove();
-  overlay.onclick = (ev) => { if (ev.target === overlay) overlay.remove(); };
-
-  renderGrid();
-}
-
-// ---- Farbauswahl (statt blind Hex-Codes eintippen) ----
-
-function normalizeHex(v) {
-  if (!v) return null;
-  const clean = v.trim().replace(/^#/, '');
-  return /^[0-9a-fA-F]{6}$/.test(clean) ? clean.toUpperCase() : null;
-}
-
-// Modal zum Auswählen eines Logos, genutzt vom "logo-picker"-Feld bei
-// Tipps & Infos. onSelect(url) wird beim Klick auf ein Logo aufgerufen.
-function openLogoPickerModal(onSelect) {
-  const overlay = document.createElement('div');
-  overlay.className = 'logo-picker-overlay';
-  overlay.innerHTML =
-    '<div class="logo-picker-modal">' +
-      '<div class="section-title" style="margin-top:0;">Logo wählen</div>' +
-      '<input type="text" class="search-input lp-search" placeholder="Suchen, z. B. hammer">' +
-      '<div class="logo-category-filters lp-cats"></div>' +
-      '<div class="logo-picker-grid lp-grid"></div>' +
-      '<div class="actions"><button type="button" class="btn btn-secondary lp-close">Schließen</button></div>' +
-    '</div>';
-  document.body.appendChild(overlay);
-
-  let cat = 'alle';
-  const search = overlay.querySelector('.lp-search');
-  const catsEl = overlay.querySelector('.lp-cats');
-  const gridEl = overlay.querySelector('.lp-grid');
-
-  function renderCats() {
-    const cats = Array.from(new Set((dataCache.logos || []).map((l) => l.category || 'sonstiges'))).sort();
-    const all = ['alle'].concat(cats);
-    catsEl.innerHTML = '';
-    all.forEach((c) => {
-      const el = document.createElement('div');
-      el.className = 'tab' + (cat === c ? ' active' : '');
-      el.textContent = c === 'alle' ? 'Alle' : c;
-      el.onclick = () => { cat = c; renderCats(); renderGrid(); };
-      catsEl.appendChild(el);
-    });
-  }
-
-  function renderGrid() {
-    const rows = filterLogos(dataCache.logos || [], search.value, cat);
-    gridEl.innerHTML = '';
-    if (!rows.length) {
-      gridEl.innerHTML = '<div class="empty">Keine Logos gefunden.</div>';
-      return;
-    }
-    rows.forEach((row) => {
-      const item = document.createElement('div');
-      item.className = 'logo-picker-item';
-      item.innerHTML = '<img src="' + row.url + '" alt=""><span></span>';
-      item.querySelector('span').textContent = row.name;
-      item.onclick = () => { onSelect(row.url); overlay.remove(); };
-      gridEl.appendChild(item);
-    });
-  }
-
-  search.oninput = renderGrid;
-  overlay.querySelector('.lp-close').onclick = () => overlay.remove();
-  overlay.onclick = (ev) => { if (ev.target === overlay) overlay.remove(); };
-
-  renderCats();
-  renderGrid();
-}
-
-// ---- Push-Rundruf an alle Nutzer ----
-
-document.getElementById('broadcastPushForm').onsubmit = async (ev) => {
-  ev.preventDefault();
-  const title = document.getElementById('broadcastTitleInput').value.trim();
-  const messageBody = document.getElementById('broadcastBodyInput').value.trim();
-  if (!title || !messageBody) { toast('Titel und Text sind Pflicht.', true); return; }
-  if (!confirm('Push-Benachrichtigung wirklich an ALLE Nutzer senden?\n\nTitel: ' + title + '\nText: ' + messageBody)) {
-    return;
-  }
-
-  const submitBtn = document.querySelector('#broadcastPushForm button[type="submit"]');
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Sende...';
-  try {
-    const res = await fetch(BROADCAST_FUNCTION_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password, title, body: messageBody }),
-    });
-    const resBody = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(resBody.error || ('Fehler ' + res.status));
-    toast('Push an ' + (resBody.sent ?? 0) + ' Gerät(e) gesendet.');
-    document.getElementById('broadcastPushForm').reset();
-  } catch (e) {
-    toast(e.message, true);
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Push an alle senden';
-  }
-};
 
 // Passwort aus vorherigem Besuch übernehmen, falls vorhanden
 (function init() {
