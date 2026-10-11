@@ -1,105 +1,89 @@
 <!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="robots" content="noindex">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Konto löschen – Handwerker Treff</title>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konto löschen – Handwerker Treff</title><meta name="description" content="So löschst du dein Konto bei Handwerker Treff und alle dazugehörigen Daten – direkt hier, in der App oder per E-Mail."><link rel="icon" href="favicon.png"><link rel="stylesheet" href="style.css">
 <style>
-  :root { --orange: #FF8C00; --text: #0D1B2A; --muted: #5B6B7C; --bg: #F2F4F7; --card: #fff; --border: #D9E0E8; }
-  @media (prefers-color-scheme: dark) { :root { --text: #EAF0F6; --muted: #9BA8B5; --bg: #0D1B2A; --card: #16283D; --border: #233A52; } }
-  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
-  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
-  h1 { font-size: 28px; margin: 0 0 8px; }
-  h2 { font-size: 18px; margin: 28px 0 8px; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; margin: 16px 0; }
-  ol, ul { padding-left: 22px; }
-  a { color: #C2410C; }
-  .muted { color: var(--muted); font-size: 14px; }
-  .btn { display: inline-block; background: var(--orange); color: #fff; text-decoration: none; font-weight: 700; padding: 12px 18px; border-radius: 12px; }
-  input[type=email], input[type=password], input[type=text] { width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 16px; margin: 6px 0 12px; }
-  label { font-weight: 600; font-size: 14px; }
-  button.btn { border: none; cursor: pointer; font-size: 16px; }
-  button.btn:disabled { opacity: .45; cursor: not-allowed; }
-  .btn-danger { background: #DC2626 !important; }
-  .btn-ghost { background: transparent !important; color: var(--muted) !important; border: 1px solid var(--border) !important; margin-left: 8px; }
-  .msg { padding: 10px 14px; border-radius: 10px; margin: 10px 0; font-size: 15px; }
-  .msg.err { background: rgba(220,38,38,.12); color: #DC2626; }
-  .msg.ok { background: rgba(22,163,74,.12); color: #16A34A; }
-  .check { display: flex; gap: 10px; align-items: flex-start; margin: 8px 0 14px; font-weight: 400; }
-  .hidden { display: none; }
-</style>
-</head>
-<body>
-<main>
-  <h1>Konto löschen</h1>
-  <p>So löschst du dein Konto bei <strong>Handwerker Treff</strong> und alle dazugehörigen Daten.</p>
+label{display:block;font-weight:600;font-size:15px;margin-top:10px}
+input[type=email],input[type=password],input[type=text]{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:16px;margin:6px 0 4px}
+input:focus{outline:2px solid var(--orange);outline-offset:1px}
+button.btn{border:none;cursor:pointer;font-size:16px;margin-top:12px}
+button.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-danger{background:#DC2626}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);margin-left:8px}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400;margin:14px 0 4px}
+.check input{margin-top:6px;accent-color:var(--orange)}
+.msg{padding:10px 14px;border-radius:10px;margin:12px 0 0;font-size:15px}
+.msg.err{background:rgba(220,38,38,.15);color:#FCA5A5}
+.msg.ok{background:rgba(22,163,74,.15);color:#86EFAC}
+.card h2{margin-top:4px}
+.card{margin-top:14px}
+.hidden{display:none}
+</style></head>
+<body><header class="site"><div class="wrap"><a class="brand" href="index.html"><img src="logo.png" alt="" width="34" height="32"> Handwerker <span>Treff</span></a><nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="experten.html">Für Experten</a><a href="support.html">Support</a><a href="konto-loeschen.html" aria-current="page">Konto löschen</a><a href="agb.html">AGB</a><a href="datenschutz.html">Datenschutz</a><a href="impressum.html">Impressum</a></nav></div></header>
+<main><div class="wrap">
 
-  <div class="card" id="webDelete">
-    <h2>Direkt hier auf der Webseite löschen</h2>
-    <p class="muted">Melde dich mit deinen Zugangsdaten aus der App an. Danach kannst du dein Konto sofort und endgültig löschen.</p>
+<h1>Konto löschen</h1>
+<p class="lead">So löschst du dein Konto bei Handwerker Treff und alle dazugehörigen Daten.</p>
 
-    <div id="stepLogin">
-      <label for="email">E-Mail-Adresse</label>
-      <input type="email" id="email" autocomplete="username" placeholder="du@beispiel.de">
-      <label for="password">Passwort</label>
-      <input type="password" id="password" autocomplete="current-password">
-      <button class="btn" id="loginBtn" type="button">Anmelden</button>
-      <div id="loginMsg"></div>
-      <p class="muted">Passwort vergessen? In der App auf „Passwort vergessen“ tippen – oder unten die E-Mail-Variante nutzen.</p>
-    </div>
+<div class="card" id="webDelete">
+<h2>Direkt hier löschen</h2>
+<p>Melde dich mit deinen Zugangsdaten aus der App an. Danach kannst du dein Konto sofort und endgültig löschen.</p>
 
-    <div id="stepConfirm" class="hidden">
-      <p>Angemeldet als <strong id="whoami"></strong></p>
-      <p><strong>Achtung:</strong> Das Löschen kann nicht rückgängig gemacht werden. Profil, Chats, Beiträge, Anzeigen und alle weiteren Inhalte (siehe unten) werden entfernt.</p>
-      <label class="check"><input type="checkbox" id="confirmCheck"> Ich möchte mein Konto und alle Daten endgültig löschen.</label>
-      <label for="confirmWord">Zur Bestätigung <strong>LÖSCHEN</strong> eintippen</label>
-      <input type="text" id="confirmWord" autocomplete="off" placeholder="LÖSCHEN">
-      <button class="btn btn-danger" id="deleteBtn" type="button" disabled>Konto endgültig löschen</button>
-      <button class="btn btn-ghost" id="cancelBtn" type="button">Abbrechen</button>
-      <div id="deleteMsg"></div>
-    </div>
+<div id="stepLogin">
+<label for="email">E-Mail-Adresse</label>
+<input type="email" id="email" autocomplete="username" placeholder="du@beispiel.de">
+<label for="password">Passwort</label>
+<input type="password" id="password" autocomplete="current-password">
+<button class="btn" id="loginBtn" type="button">Anmelden</button>
+<div id="loginMsg"></div>
+<p style="font-size:15px;color:var(--muted);margin-top:14px">Passwort vergessen? In der App auf „Passwort vergessen“ tippen – oder unten die E-Mail-Variante nutzen.</p>
+</div>
 
-    <div id="stepDone" class="hidden">
-      <div class="msg ok">Dein Konto wurde gelöscht. Du kannst die App jetzt deinstallieren. Danke, dass du dabei warst!</div>
-    </div>
-  </div>
+<div id="stepConfirm" class="hidden">
+<p>Angemeldet als <strong id="whoami"></strong></p>
+<p class="note"><strong>Achtung:</strong> Das Löschen kann nicht rückgängig gemacht werden. Profil, Chats, Beiträge, Anzeigen und alle weiteren Inhalte (siehe unten) werden entfernt.</p>
+<label class="check"><input type="checkbox" id="confirmCheck"> Ich möchte mein Konto und alle Daten endgültig löschen.</label>
+<label for="confirmWord">Zur Bestätigung <strong>LÖSCHEN</strong> eintippen</label>
+<input type="text" id="confirmWord" autocomplete="off" placeholder="LÖSCHEN">
+<button class="btn btn-danger" id="deleteBtn" type="button" disabled>Konto endgültig löschen</button><button class="btn btn-ghost" id="cancelBtn" type="button">Abbrechen</button>
+<div id="deleteMsg"></div>
+</div>
 
-  <div class="card">
-    <h2>In der App löschen</h2>
-    <ol>
-      <li>App öffnen und anmelden</li>
-      <li>Unten auf <strong>Profil</strong> tippen</li>
-      <li><strong>Einstellungen</strong> → <strong>Konto löschen</strong></li>
-      <li>Bestätigen – das Konto wird sofort gelöscht</li>
-    </ol>
-  </div>
+<div id="stepDone" class="hidden">
+<div class="msg ok">Dein Konto wurde gelöscht. Du kannst die App jetzt deinstallieren. Danke, dass du dabei warst!</div>
+</div>
+</div>
 
-  <div class="card">
-    <h2>Per E-Mail (z. B. wenn du dein Passwort nicht mehr weißt)</h2>
-    <p>Schreib eine E-Mail von der Adresse, mit der du registriert bist, an
-      <a href="mailto:handwerker.treff@gmail.com?subject=Konto%20l%C3%B6schen">handwerker.treff@gmail.com</a>
-      mit dem Betreff <em>„Konto löschen“</em>. Wir löschen dein Konto innerhalb von 7 Tagen und bestätigen dir das per E-Mail.</p>
-    <p><a class="btn" href="mailto:handwerker.treff@gmail.com?subject=Konto%20l%C3%B6schen">E-Mail schreiben</a></p>
-  </div>
+<div class="card">
+<h2>In der App löschen</h2>
+<ol>
+<li>App öffnen und anmelden</li>
+<li>Unten auf <strong>Profil</strong> tippen</li>
+<li><strong>Einstellungen</strong> → <strong>Konto löschen</strong></li>
+<li>Bestätigen – das Konto wird sofort gelöscht</li>
+</ol>
+</div>
 
-  <h2>Was wird gelöscht?</h2>
-  <ul>
-    <li>Login-Konto (E-Mail-Adresse, Passwort)</li>
-    <li>Profil mit Foto, Galerie, Gewerk, PLZ und Beschreibung</li>
-    <li>Chats, Nachrichtenanfragen und Kontakte</li>
-    <li>Beiträge, Kommentare, Marktplatz-Anzeigen, Profi-Checks und Stellenanzeigen</li>
-    <li>Bautagebuch, Baustellen und Wetter-Einstellungen</li>
-    <li>Experten-Profil und noch nicht geprüfte Nachweise</li>
-  </ul>
+<div class="card">
+<h2>Per E-Mail</h2>
+<p>Zum Beispiel, wenn du dein Passwort nicht mehr weißt: Schreib von der Adresse, mit der du registriert bist, an <a href="mailto:handwerker.treff@gmail.com?subject=Konto%20l%C3%B6schen">handwerker.treff@gmail.com</a> mit dem Betreff „Konto löschen“. Wir löschen dein Konto innerhalb von 7 Tagen und bestätigen dir das per E-Mail.</p>
+<p><a class="btn" href="mailto:handwerker.treff@gmail.com?subject=Konto%20l%C3%B6schen">E-Mail schreiben</a></p>
+</div>
 
-  <h2>Was wird aufbewahrt?</h2>
-  <p>Daten zu bezahlten Buchungen („Meister per Video“), z. B. Rechnungs- und Zahlungsbelege, bewahren wir nur so lange auf, wie es gesetzlich vorgeschrieben ist (in der Regel bis zu 10 Jahre nach Steuerrecht). Zahlungsdaten selbst liegen bei unserem Zahlungsdienstleister Stripe.</p>
+<h2>Was wird gelöscht?</h2>
+<ul>
+<li>Login-Konto (E-Mail-Adresse, Passwort)</li>
+<li>Profil mit Foto, Galerie, Gewerk, PLZ und Beschreibung</li>
+<li>Chats, Nachrichtenanfragen und Kontakte</li>
+<li>Beiträge, Kommentare, Marktplatz-Anzeigen, Profi-Checks und Stellenanzeigen</li>
+<li>Bautagebuch, Baustellen und Wetter-Einstellungen</li>
+<li>Experten-Profil und noch nicht geprüfte Nachweise</li>
+</ul>
 
-  <p class="muted">Betreiber: Handwerker Treff, Karl-Heinz Letas, Heuweg 46, 26903 Surwold ·
-    <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
-</main>
+<h2>Was wird aufbewahrt?</h2>
+<p>Daten zu bezahlten Buchungen („Meister per Video“), z. B. Rechnungs- und Zahlungsbelege, bewahren wir nur so lange auf, wie es gesetzlich vorgeschrieben ist (in der Regel bis zu 10 Jahre nach Steuerrecht) – ohne Verknüpfung zu deinem gelöschten Profil. Zahlungsdaten selbst liegen bei unserem Zahlungsdienstleister Stripe.</p>
 
+</div></main>
+<footer><div class="wrap"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="agb.html">AGB</a><a href="support.html">Support</a><a href="konto-loeschen.html">Konto löschen</a><br>&copy; Handwerker Treff &middot; Karl-Heinz Letas &middot; Heuweg 46 &middot; 26903 Surwold</div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 // Öffentlicher Schlüssel (steckt auch in jeder App) – Schutz läuft über das Login des Nutzers.
@@ -151,5 +135,4 @@ $('deleteBtn').onclick = async () => {
   }
 };
 </script>
-</body>
-</html>
+</body></html>
