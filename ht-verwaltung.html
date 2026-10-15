@@ -241,7 +241,10 @@
     background: #fff; border-radius: 8px; display: none;
   }
   .logo-picker-empty { font-size: 12px; color: var(--muted); }
-  .logo-picker-actions { display: flex; gap: 8px; }
+  .logo-picker-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .logo-picker-preview.is-poster img { width: 120px; height: auto; max-height: 180px; }
+  .logo-picker-actions .lp-upload { background: var(--orange); color: #fff; border-color: var(--orange); }
+  .lp-status { font-size: 12px; color: var(--muted); margin-top: 6px; }
   .logo-picker-overlay {
     position: fixed; inset: 0; background: rgba(0,0,0,0.6);
     z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px;
@@ -303,6 +306,35 @@
     padding: 0; border: 1px solid var(--border); border-radius: 8px;
     background: none; cursor: pointer;
   }
+
+  /* Schnell-Assistent Werbepartner */
+  .qa-card { background: var(--card); border: 1px solid var(--orange); border-radius: 14px; padding: 18px; margin-bottom: 22px; }
+  .qa-card h3 { margin: 0 0 4px; font-size: 17px; }
+  .qa-grid { display: grid; grid-template-columns: 1fr 300px; gap: 22px; align-items: start; }
+  @media (max-width: 760px) { .qa-grid { grid-template-columns: 1fr; } }
+  .qa-card label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 4px; }
+  .qa-card input[type=text], .qa-card select { width: 100%; box-sizing: border-box; background: var(--bg); color: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 9px 11px; font-size: 14px; font-family: inherit; }
+  .qa-card input[type=text]:focus, .qa-card select:focus { outline: none; border-color: var(--orange); }
+  .qa-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .qa-logo { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .qa-logo img { width: 52px; height: 52px; object-fit: contain; background: #fff; border-radius: 10px; border: 1px solid var(--border); }
+  .qa-small { font-size: 12px; color: var(--muted); }
+  .qa-btn { background: transparent; border: 1px solid var(--border); color: inherit; border-radius: 8px; padding: 7px 12px; cursor: pointer; font-size: 13px; }
+  .qa-btn:hover { border-color: var(--orange); }
+  .qa-save { background: var(--orange); color: #fff; border: none; border-radius: 10px; padding: 12px 20px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 16px; }
+  .qa-save:disabled { opacity: .5; cursor: not-allowed; }
+  .qa-preview-title { font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .05em; }
+  .qa-phone { background: #0D1B2A; border-radius: 22px; padding: 14px 12px; }
+  .qa-ad { background: #16283D; border: 1px solid #233A52; border-radius: 14px; overflow: hidden; color: #fff; }
+  .qa-ad-row { display: flex; align-items: center; gap: 12px; padding: 14px; }
+  .qa-ad-icon { width: 44px; height: 44px; border-radius: 10px; background: #0D1B2A; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .qa-ad-icon img { width: 100%; height: 100%; object-fit: contain; }
+  .qa-ad b { display: block; font-size: 14px; }
+  .qa-ad span.t { display: block; font-size: 12px; color: #9BA8B5; margin-top: 3px; }
+  .qa-ad .lbl { font-size: 10px; color: #9BA8B5; font-weight: 600; margin-left: auto; align-self: flex-start; }
+  .qa-ad img.poster { width: 100%; display: block; background: #fff; }
+  .qa-ad-btns { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 14px 14px; }
+  .qa-ad-btns span { background: #FF8C00; color: #fff; border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -333,6 +365,60 @@
     </div>
 
     <div id="tab-ads">
+      <div class="qa-card" id="qaCard">
+        <h3>⚡ Werbepartner schnell anlegen</h3>
+        <div class="qa-small">Link einfügen – Name und Logo werden automatisch ergänzt. Rechts siehst du, wie es in der App aussieht.</div>
+        <div class="qa-grid">
+          <div>
+            <label for="qaLink">1. Link zum Partner (auch Affiliate-Links wie Awin)</label>
+            <input type="text" id="qaLink" placeholder="https://… einfügen">
+            <div class="qa-small" id="qaDomain"></div>
+
+            <label for="qaName">2. Name</label>
+            <input type="text" id="qaName" placeholder="z. B. Scheppach">
+
+            <label for="qaTagline">3. Kurzer Werbetext</label>
+            <input type="text" id="qaTagline" maxlength="80" placeholder="z. B. Werkzeug &amp; Maschinen – jetzt im Shop">
+
+            <label for="qaCategory">4. Kategorie</label>
+            <select id="qaCategory">
+              <option value="werkzeug">Werkzeug</option>
+              <option value="kleidung">Arbeitskleidung</option>
+              <option value="fahrzeuge">Fahrzeuge</option>
+              <option value="jobs">Jobs</option>
+              <option value="sonstiges">Sonstiges</option>
+            </select>
+
+            <label>5. Logo</label>
+            <div class="qa-logo">
+              <img id="qaLogoImg" alt="" style="display:none">
+              <span class="qa-small" id="qaLogoState">Noch kein Logo</span>
+              <button type="button" class="qa-btn" id="qaLogoAuto">🔄 Automatisch holen</button>
+              <button type="button" class="qa-btn" id="qaLogoUploadBtn">📁 Eigenes Logo hochladen</button>
+              <input type="file" id="qaLogoFile" accept="image/*" style="display:none">
+            </div>
+
+            <label>6. Plakat / Flyer (optional, z. B. Stellenanzeige)</label>
+            <div class="qa-logo">
+              <button type="button" class="qa-btn" id="qaPosterBtn">📄 Plakat hochladen</button>
+              <button type="button" class="qa-btn" id="qaPosterClear" style="display:none">Entfernen</button>
+              <span class="qa-small" id="qaPosterState">kein Plakat</span>
+              <input type="file" id="qaPosterFile" accept="image/*" style="display:none">
+            </div>
+
+            <div class="qa-row2">
+              <div><label for="qaPhone">Telefon (optional)</label><input type="text" id="qaPhone" placeholder="0441 123456"></div>
+              <div><label for="qaEmail">E-Mail (optional)</label><input type="text" id="qaEmail" placeholder="info@firma.de"></div>
+            </div>
+
+            <button type="button" class="qa-save" id="qaSave" disabled>✓ Werbepartner anlegen</button>
+          </div>
+          <div>
+            <div class="qa-preview-title">Vorschau in der App</div>
+            <div class="qa-phone"><div class="qa-ad" id="qaPreview"></div></div>
+          </div>
+        </div>
+      </div>
       <div class="section-title">Werbepartner</div>
       <div id="adsList"></div>
       <button class="add-btn" onclick="openEditor('ads')">+ Neuer Werbepartner</button>
@@ -503,7 +589,7 @@ const FIELD_CONFIG = {
       { key: 'text_color', label: 'Schriftfarbe (optional)', type: 'color-picker', hint: 'Leer lassen für die normale weiße Schrift.' },
       { key: 'bg_image_url', label: 'Hintergrundbild für die ganze Karte (optional)', type: 'text', hint: 'Füllt die komplette Karte mit einem Bild (leicht abgedunkelt für Lesbarkeit), Text liegt darüber. Ersetzt das Banner-Bild oben.' },
       { key: 'link', label: 'Link (optional, z. B. Website)', type: 'text' },
-      { key: 'poster_url', label: 'Plakat / Flyer (Hochformat, optional)', type: 'logo-picker', hint: 'Für ganze Anzeigen wie Stellenangebote oder Flyer: Bild zuerst im Tab „Logos“ hochladen (Kategorie z. B. „werbung“, max. 3 MB), dann hier auswählen. Die App zeigt das Plakat in voller Breite, Nutzer können es antippen und vergrößern. Banner-, Hintergrundbild und Farben werden dann ignoriert.' },
+      { key: 'poster_url', label: 'Plakat / Flyer (Hochformat, optional)', type: 'logo-picker', uploadCategory: 'werbung', poster: true, hint: 'Für ganze Anzeigen wie Stellenangebote oder Flyer: einfach auf „Datei hochladen“ klicken und das Bild (JPG/PNG) vom Rechner oder Handy wählen – große Bilder werden automatisch verkleinert. Die App zeigt das Plakat in voller Breite, Nutzer können es antippen und vergrößern. Banner-, Hintergrundbild und Farben werden dann ignoriert.' },
       { key: 'phone', label: 'Telefon (optional)', type: 'text', hint: 'Zeigt in der App einen Knopf „Anrufen“, z. B. 0172 8710433' },
       { key: 'email', label: 'E-Mail (optional)', type: 'text', hint: 'Zeigt in der App einen Knopf „E-Mail“.' },
       { key: 'sort_order', label: 'Reihenfolge (kleinere Zahl = weiter oben)', type: 'number' },
@@ -688,6 +774,156 @@ function showApp() {
   loadTradeSuggestions();
   loadLogos();
   loadDocs();
+}
+window.addEventListener('DOMContentLoaded', () => qaInit());
+
+// ---- Schnell-Assistent: Werbepartner ----
+const qa = { logo_url: null, poster_url: null, logoFor: '' };
+const AFFILIATE_PARAMS = ['ued', 'url', 'murl', 'u', 'p', 'r', 'target', 'dest', 'destination', 'redirect'];
+function qaTargetUrl(link) {
+  try {
+    const u = new URL(link.trim());
+    for (const k of AFFILIATE_PARAMS) {
+      const v = u.searchParams.get(k);
+      if (v && /^https?:\/\//i.test(v)) return new URL(v);
+    }
+    return u;
+  } catch (e) { return null; }
+}
+function qaDomain(link) {
+  const t = qaTargetUrl(link);
+  return t ? t.hostname.replace(/^www\./, '') : '';
+}
+function qaNameFromDomain(d) {
+  const parts = d.split('.').filter((x) => !['www', 'shop', 'store', 'de', 'com', 'net', 'eu', 'at', 'ch', 'org', 'info'].includes(x));
+  const base = parts[parts.length - 1] || d.split('.')[0] || '';
+  return base.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+}
+function qaEl(id) { return document.getElementById(id); }
+function qaRender() {
+  const name = qaEl('qaName').value.trim() || 'Name des Partners';
+  const tagline = qaEl('qaTagline').value.trim();
+  const box = qaEl('qaPreview');
+  box.innerHTML = '';
+  if (qa.poster_url) {
+    const img = document.createElement('img'); img.className = 'poster'; img.src = qa.poster_url; box.appendChild(img);
+  }
+  const row = document.createElement('div'); row.className = 'qa-ad-row';
+  if (!qa.poster_url) {
+    const ic = document.createElement('div'); ic.className = 'qa-ad-icon';
+    if (qa.logo_url) { const im = document.createElement('img'); im.src = qa.logo_url; ic.appendChild(im); } else { ic.textContent = '🛠'; }
+    row.appendChild(ic);
+  }
+  const txt = document.createElement('div'); txt.style.flex = '1';
+  const b = document.createElement('b'); b.textContent = name; txt.appendChild(b);
+  if (tagline) { const t = document.createElement('span'); t.className = 't'; t.textContent = tagline; txt.appendChild(t); }
+  row.appendChild(txt);
+  const lbl = document.createElement('span'); lbl.className = 'lbl'; lbl.textContent = 'Anzeige'; row.appendChild(lbl);
+  box.appendChild(row);
+  const btns = [];
+  if (qaEl('qaPhone').value.trim()) btns.push('📞 Anrufen');
+  if (qaEl('qaEmail').value.trim()) btns.push('✉️ E-Mail');
+  if (qa.poster_url && qaEl('qaLink').value.trim()) btns.push('🌐 Website');
+  if (btns.length) {
+    const bw = document.createElement('div'); bw.className = 'qa-ad-btns';
+    btns.forEach((x) => { const s = document.createElement('span'); s.textContent = x; bw.appendChild(s); });
+    box.appendChild(bw);
+  }
+  qaEl('qaSave').disabled = !(qaEl('qaName').value.trim() && (qaEl('qaLink').value.trim() || qa.poster_url));
+  qaEl('qaLogoImg').style.display = qa.logo_url ? 'block' : 'none';
+  if (qa.logo_url) qaEl('qaLogoImg').src = qa.logo_url;
+  qaEl('qaPosterState').textContent = qa.poster_url ? 'Plakat hochgeladen ✓' : 'kein Plakat';
+  qaEl('qaPosterClear').style.display = qa.poster_url ? 'inline-block' : 'none';
+}
+async function qaAutoLogo() {
+  const d = qaDomain(qaEl('qaLink').value);
+  if (!d) { toast('Bitte zuerst einen gültigen Link einfügen.', true); return; }
+  qaEl('qaLogoState').textContent = 'Logo wird geholt …';
+  try {
+    const body = await callLogosApi('import_url', { name: qaEl('qaName').value.trim() || qaNameFromDomain(d), category: 'marken', domain: d });
+    qa.logo_url = body.data && body.data[0] && body.data[0].url;
+    qa.logoFor = d;
+    qaEl('qaLogoState').textContent = qa.logo_url ? 'Logo automatisch geholt ✓ (passt es nicht? eigenes hochladen)' : 'Kein Logo gefunden';
+    loadLogos();
+  } catch (e) {
+    qaEl('qaLogoState').textContent = e.message;
+  }
+  qaRender();
+}
+async function qaUpload(file, category) {
+  let fileBase64, fileName, contentType;
+  if (isSvgFile(file)) {
+    fileBase64 = await svgFileToPngBase64(file); fileName = file.name.replace(/\.svg$/i, '') + '.png'; contentType = 'image/png';
+  } else {
+    fileBase64 = await fileToBase64(file); fileName = file.name; contentType = file.type || 'image/png';
+  }
+  const name = (qaEl('qaName').value.trim() || nameFromFileName(file.name)) + (category === 'werbung' ? ' – Plakat' : '');
+  const body = await callLogosApi('upload', { name, category, tags: [], fileName, contentType, fileBase64 });
+  loadLogos();
+  return body.data && body.data[0] && body.data[0].url;
+}
+function qaReset() {
+  ['qaLink', 'qaName', 'qaTagline', 'qaPhone', 'qaEmail'].forEach((id) => { qaEl(id).value = ''; });
+  qa.logo_url = null; qa.poster_url = null; qa.logoFor = '';
+  qaEl('qaDomain').textContent = ''; qaEl('qaLogoState').textContent = 'Noch kein Logo';
+  qaRender();
+}
+function qaInit() {
+  const link = qaEl('qaLink');
+  link.addEventListener('change', () => {
+    const d = qaDomain(link.value);
+    qaEl('qaDomain').textContent = d ? 'Ziel-Website: ' + d : (link.value.trim() ? 'Link nicht erkannt – bitte mit https:// einfügen' : '');
+    if (d && !qaEl('qaName').value.trim()) qaEl('qaName').value = qaNameFromDomain(d);
+    if (d && qa.logoFor !== d && !qa.poster_url) qaAutoLogo();
+    qaRender();
+  });
+  link.addEventListener('paste', () => setTimeout(() => link.dispatchEvent(new Event('change')), 0));
+  ['qaName', 'qaTagline', 'qaPhone', 'qaEmail'].forEach((id) => qaEl(id).addEventListener('input', qaRender));
+  qaEl('qaLogoAuto').onclick = qaAutoLogo;
+  qaEl('qaLogoUploadBtn').onclick = () => qaEl('qaLogoFile').click();
+  qaEl('qaLogoFile').onchange = async (ev) => {
+    const f = ev.target.files[0]; if (!f) return;
+    qaEl('qaLogoState').textContent = 'Lade hoch …';
+    try { qa.logo_url = await qaUpload(f, 'marken'); qa.logoFor = 'manual'; qaEl('qaLogoState').textContent = 'Eigenes Logo ✓'; }
+    catch (e) { qaEl('qaLogoState').textContent = e.message; }
+    ev.target.value = ''; qaRender();
+  };
+  qaEl('qaPosterBtn').onclick = () => qaEl('qaPosterFile').click();
+  qaEl('qaPosterClear').onclick = () => { qa.poster_url = null; qaRender(); };
+  qaEl('qaPosterFile').onchange = async (ev) => {
+    const f = ev.target.files[0]; if (!f) return;
+    if (f.size > 3 * 1024 * 1024) { toast('Plakat zu groß (max. 3 MB).', true); ev.target.value = ''; return; }
+    qaEl('qaPosterState').textContent = 'Lade hoch …';
+    try { qa.poster_url = await qaUpload(f, 'werbung'); } catch (e) { toast(e.message, true); }
+    ev.target.value = ''; qaRender();
+  };
+  qaEl('qaSave').onclick = async () => {
+    const btn = qaEl('qaSave'); btn.disabled = true; btn.textContent = 'Speichere …';
+    const row = {
+      name: qaEl('qaName').value.trim(),
+      tagline: qaEl('qaTagline').value.trim(),
+      category: qaEl('qaCategory').value,
+      icon: 'construct-outline',
+      logo_url: qa.logo_url,
+      poster_url: qa.poster_url,
+      link: qaEl('qaLink').value.trim() || null,
+      phone: qaEl('qaPhone').value.trim() || null,
+      email: qaEl('qaEmail').value.trim() || null,
+      sort_order: 0,
+      active: true,
+    };
+    try {
+      await callApi('ads', 'upsert', { row });
+      toast('„' + row.name + '“ ist jetzt in der App sichtbar.');
+      qaReset();
+      loadTable('ads');
+    } catch (e) {
+      toast(e.message, true);
+    }
+    btn.textContent = '✓ Werbepartner anlegen';
+    qaRender();
+  };
+  qaRender();
 }
 
 // ---- Nachweise (Meisterbrief, Haftpflicht, Gewerbe) ----
@@ -1134,11 +1370,14 @@ function openEditor(table, existing) {
     } else if (f.type === 'logo-picker') {
       row.innerHTML =
         '<label>' + f.label + '</label>' +
-        '<div class="logo-picker-preview"><img alt=""><span class="logo-picker-empty">Kein Logo gewählt</span></div>' +
+        '<div class="logo-picker-preview' + (f.poster ? ' is-poster' : '') + '"><img alt=""><span class="logo-picker-empty">' + (f.poster ? 'Kein Plakat gewählt' : 'Kein Logo gewählt') + '</span></div>' +
         '<div class="logo-picker-actions">' +
-          '<button type="button" class="btn btn-secondary logo-picker-choose">Logo wählen</button>' +
+          '<button type="button" class="btn btn-secondary lp-upload">📁 Datei hochladen</button>' +
+          '<button type="button" class="btn btn-secondary logo-picker-choose">Aus Bibliothek wählen</button>' +
           '<button type="button" class="btn btn-secondary logo-picker-clear">Entfernen</button>' +
+          '<input type="file" class="lp-file" accept="image/*" style="display:none">' +
         '</div>' +
+        '<div class="lp-status"></div>' +
         '<input type="hidden" data-field="' + f.key + '">';
     } else if (f.type === 'icon-picker') {
       row.innerHTML =
@@ -1204,6 +1443,27 @@ function openEditor(table, existing) {
       row.querySelector('.logo-picker-clear').onclick = () => {
         hidden.value = '';
         syncPreview();
+      };
+      const fileInput = row.querySelector('.lp-file');
+      const status = row.querySelector('.lp-status');
+      row.querySelector('.lp-upload').onclick = () => fileInput.click();
+      fileInput.onchange = async () => {
+        const file = fileInput.files && fileInput.files[0];
+        fileInput.value = '';
+        if (!file) return;
+        const nameInput = form.querySelector('[data-field="name"]') || form.querySelector('[data-field="title"]');
+        const baseName = (nameInput && nameInput.value.trim()) || nameFromFileName(file.name);
+        status.textContent = 'Wird hochgeladen …';
+        try {
+          const url = await uploadImageToLibrary(file, baseName + (f.poster ? ' – Plakat' : ''), f.uploadCategory || 'marken');
+          if (!url) throw new Error('Upload fehlgeschlagen.');
+          hidden.value = url;
+          syncPreview();
+          status.textContent = 'Hochgeladen ✓ – jetzt unten speichern.';
+        } catch (e) {
+          status.textContent = '';
+          toast(e.message || String(e), true);
+        }
       };
     }
 
@@ -1352,6 +1612,39 @@ function openEditor(table, existing) {
 function onLogoCategoryChange() {
   const sel = document.getElementById('logoCategorySelect').value;
   document.getElementById('logoCustomCategoryWrap').style.display = sel === '__custom__' ? 'block' : 'none';
+}
+
+// Bild direkt aus einem Formularfeld hochladen (landet auch in der Logo-Bibliothek).
+// Große Fotos werden vorher im Browser auf max. 2000 px / JPEG verkleinert (Limit 3 MB).
+async function uploadImageToLibrary(file, name, category) {
+  let fileBase64, fileName, contentType;
+  if (isSvgFile(file)) {
+    fileBase64 = await svgFileToPngBase64(file); fileName = file.name.replace(/\.svg$/i, '') + '.png'; contentType = 'image/png';
+  } else if (file.size > 2.5 * 1024 * 1024) {
+    fileBase64 = await shrinkImageToJpegBase64(file, 2000, 0.85); fileName = file.name.replace(/\.[^.]+$/, '') + '.jpg'; contentType = 'image/jpeg';
+  } else {
+    fileBase64 = await fileToBase64(file); fileName = file.name; contentType = file.type || 'image/png';
+  }
+  const body = await callLogosApi('upload', { name, category, tags: [], fileName, contentType, fileBase64 });
+  try { loadLogos(); } catch (e) {}
+  return body.data && body.data[0] && body.data[0].url;
+}
+function shrinkImageToJpegBase64(file, maxSide, quality) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.naturalWidth * scale); c.height = Math.round(img.naturalHeight * scale);
+      const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+      ctx.drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      const d = c.toDataURL('image/jpeg', quality); resolve(d.slice(d.indexOf(',') + 1));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Bild konnte nicht gelesen werden.')); };
+    img.src = url;
+  });
 }
 
 function fileToBase64(file) {
