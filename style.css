@@ -25,3 +25,5 @@ footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font
 .steps b{color:#fff}
 .note{background:var(--card);border-left:4px solid var(--orange);padding:12px 16px;border-radius:8px;color:var(--muted);font-size:15px}
 nav a{white-space:nowrap;display:inline-block}
+.qr{display:flex;align-items:center;gap:16px;margin:8px 0 10px}.qr img{background:#fff;border-radius:12px;padding:8px;display:block}.qr p{margin:0;color:var(--muted);font-size:15px}.qr b{color:#fff}
+@media (max-width:600px){.qr{display:none}}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Handwerker Treff – App laden</title><meta name="robots" content="noindex"><link rel="icon" href="../favicon.png"><link rel="stylesheet" href="../style.css">
+<script>
+// Leitet je nach Handy in den passenden Store weiter (Ziel des QR-Codes).
+// APP_STORE: sobald die iOS-App in DE verfügbar ist, Link eintragen, z. B. "https://apps.apple.com/de/app/id1234567890"
+var APP_STORE = "";
+var PLAY_STORE = "https://play.google.com/store/apps/details?id=de.handwerkertreffapp.app";
+var ua = navigator.userAgent || "";
+var isIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+if (/Android/i.test(ua)) location.replace(PLAY_STORE);
+else if (isIOS && APP_STORE) location.replace(APP_STORE);
+</script></head>
+<body><header class="site"><div class="wrap"><a class="brand" href="../index.html"><img src="../logo.png" alt="" width="34" height="32"> Handwerker <span>Treff</span></a></div></header>
+<main><div class="wrap"><div class="hero">
+<h1>Handwerker Treff laden</h1>
+<p class="lead">Wähle deinen Store:</p>
+<div class="btns">
+<span class="btn off" id="ios">Bald im App Store</span>
+<a class="btn" href="https://play.google.com/store/apps/details?id=de.handwerkertreffapp.app">Jetzt bei Google Play</a>
+</div>
+<p><a href="../index.html">Mehr über die App</a></p>
+</div></div></main>
+<script>if (APP_STORE) { var e = document.getElementById("ios"); var a = document.createElement("a"); a.className = "btn"; a.href = APP_STORE; a.textContent = "Im App Store laden"; e.replaceWith(a); }</script>
+</body></html>
