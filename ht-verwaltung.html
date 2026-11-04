@@ -444,6 +444,7 @@
           <label><input type="checkbox" id="impGastro" checked=""> Gastronomie</label>
           <label><input type="checkbox" id="impUnterkunft" checked=""> Unterkünfte</label>
           <label><input type="checkbox" id="impCamping" checked=""> Camping</label>
+          <label><input type="checkbox" id="impLebensmittel" checked=""> Lebensmittel</label>
           <label style="color:#b45309;"><input type="checkbox" id="impPublish"> Sofort freigeben (ohne Entwurf)</label>
         </div>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
@@ -669,7 +670,7 @@ const FIELD_CONFIG = {
     label: 'Regionales',
     idField: 'id',
     fields: [
-      { key: 'category', label: 'Kategorie', type: 'select-editable', options: [['imbiss', 'Imbiss'], ['restaurant', 'Restaurant'], ['unterkunft', 'Unterkunft'], ['camping', 'Camping'], ['sonstiges', 'Sonstiges']], hint: 'Für die App-Filter bitte eine der Standard-Kategorien nehmen.' },
+      { key: 'category', label: 'Kategorie', type: 'select-editable', options: [['imbiss', 'Imbiss'], ['restaurant', 'Restaurant'], ['unterkunft', 'Unterkunft'], ['camping', 'Camping'], ['lebensmittel', 'Lebensmittel'], ['sonstiges', 'Sonstiges']], hint: 'Für die App-Filter bitte eine der Standard-Kategorien nehmen.' },
       { key: 'name', label: 'Name', type: 'text', required: true },
       { key: 'description', label: 'Beschreibung', type: 'textarea' },
       { key: 'address', label: 'Straße & Hausnummer', type: 'text' },
@@ -1128,11 +1129,13 @@ const OSM_FILTERS = {
   gastro: ['["amenity"~"^(restaurant|cafe|fast_food|biergarten|pub|ice_cream)$"]', '["shop"="bakery"]'],
   unterkunft: ['["tourism"~"^(hotel|guest_house|apartment|hostel|motel|chalet)$"]'],
   camping: ['["tourism"~"^(camp_site|caravan_site)$"]'],
+  lebensmittel: ['["shop"~"^(supermarket|convenience|butcher|greengrocer|farm|organic|beverages)$"]'],
 };
 const OSM_KIND = {
   restaurant: 'Restaurant', cafe: 'Café', fast_food: 'Imbiss', biergarten: 'Biergarten', pub: 'Kneipe', ice_cream: 'Eisdiele',
   hotel: 'Hotel', guest_house: 'Gästehaus / Pension', apartment: 'Ferienwohnung', hostel: 'Hostel', motel: 'Motel', chalet: 'Ferienhaus',
   camp_site: 'Campingplatz', caravan_site: 'Wohnmobilstellplatz', bakery: 'Bäckerei',
+  supermarket: 'Supermarkt', convenience: 'Lebensmittelladen', butcher: 'Metzgerei', greengrocer: 'Obst & Gemüse', farm: 'Hofladen', organic: 'Bioladen', beverages: 'Getränkemarkt',
 };
 const OVERPASS_MIRRORS = [
   'https://overpass-api.de/api/interpreter',
@@ -1143,6 +1146,7 @@ const OVERPASS_MIRRORS = [
 function osmCategory(t) {
   if (t.tourism === 'camp_site' || t.tourism === 'caravan_site') return 'camping';
   if (t.tourism) return 'unterkunft';
+  if (/^(supermarket|convenience|butcher|greengrocer|farm|organic|beverages)$/.test(t.shop || '')) return 'lebensmittel';
   if (t.amenity === 'fast_food' || t.amenity === 'ice_cream' || t.shop === 'bakery') return 'imbiss';
   return 'restaurant';
 }
@@ -1196,6 +1200,7 @@ async function importPlaces() {
   if (document.getElementById('impGastro').checked) groups.push('gastro');
   if (document.getElementById('impUnterkunft').checked) groups.push('unterkunft');
   if (document.getElementById('impCamping').checked) groups.push('camping');
+  if (document.getElementById('impLebensmittel').checked) groups.push('lebensmittel');
   if (!/^\d{5}$/.test(plz)) { toast('Bitte eine 5-stellige PLZ eingeben.', true); return; }
   if (!groups.length) { toast('Bitte mindestens eine Kategorie wählen.', true); return; }
   try {
@@ -1272,6 +1277,7 @@ async function bulkImport() {
   if (document.getElementById('impGastro').checked) groups.push('gastro');
   if (document.getElementById('impUnterkunft').checked) groups.push('unterkunft');
   if (document.getElementById('impCamping').checked) groups.push('camping');
+  if (document.getElementById('impLebensmittel').checked) groups.push('lebensmittel');
   if (!groups.length) { toast('Bitte oben mindestens eine Kategorie wählen.', true); return; }
   const publish = document.getElementById('impPublish').checked;
   if (!confirm('Sammelimport für ganz Niedersachsen & Bremen starten?\n\n' + (publish ? 'Die Einträge werden SOFORT veröffentlicht.' : 'Die Einträge werden als ENTWURF angelegt.') + '\nDas Fenster muss 30–60 Minuten offen bleiben.')) return;
