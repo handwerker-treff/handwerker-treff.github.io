@@ -435,7 +435,7 @@
       <p class="hint" style="margin-bottom: 14px;">Diese Einträge erscheinen in der App unter „Entdecken → Regionales“ mit Umkreissuche. Lat/Lng kannst du leer lassen – sie werden beim Speichern automatisch aus Adresse/PLZ/Ort ermittelt (OpenStreetMap).</p>
       <div class="card" style="display:block; margin-bottom:16px;">
         <b>Automatisch aus OpenStreetMap importieren</b>
-        <p class="hint" style="margin:6px 0 10px;">Holt Gastronomie, Unterkünfte und Camping im Umkreis einer PLZ. Die Einträge landen als <b>Entwurf</b> (nicht sichtbar). Prüfe sie unten (ausgegraut) und schalte sie frei. Bereits vorhandene Einträge werden nicht überschrieben.</p>
+        <p class="hint" style="margin:6px 0 10px;">Ganz Deutschland ist bereits importiert (ca. 370.000 Orte, Skript <code>tools/osm-import-de.mjs</code>). Hier lassen sich einzelne Gebiete nachholen: Holt Gastronomie, Unterkünfte, Camping und Lebensmittel im Umkreis einer PLZ. Die Einträge landen als <b>Entwurf</b> (nicht sichtbar). Prüfe sie unten (ausgegraut) und schalte sie frei. Bereits vorhandene Einträge werden nicht überschrieben.</p>
         <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:8px;">
           <input id="impPlz" placeholder="PLZ, z. B. 26215" maxlength="5" style="width:130px;">
           <select id="impRadius"><option value="5">5 km</option><option value="10">10 km</option><option value="15" selected="">15 km</option><option value="25">25 km</option><option value="30">30 km</option></select>
@@ -454,15 +454,23 @@
         </div>
         <div id="impResult" class="hint" style="margin-top:10px;"></div>
       </div>
-      <div class="card" style="display:block; margin-bottom:16px;">
-        <b>Sammelimport: ganz Niedersachsen &amp; Bremen</b>
-        <p class="hint" style="margin:6px 0 10px;">Arbeitet automatisch 153 Gebietskacheln ab (ca. 30–60 Minuten). Dieses Fenster muss dabei <b>offen bleiben</b>. Es nutzt die Kategorien und das Häkchen „Sofort freigeben“ von oben. Bei Abbruch oder Fehler setzt ein erneuter Start dort fort, wo es aufgehört hat.</p>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="add-btn" style="margin:0;" id="bulkStartBtn" onclick="bulkImport()">Sammelimport starten</button>
-          <button class="add-btn" style="margin:0; background:#6b7280;" onclick="bulkStop()">Stopp</button>
-          <button class="add-btn" style="margin:0; background:#6b7280;" onclick="bulkReset()">Fortschritt zurücksetzen</button>
+      <div class="card" style="display:block; margin-bottom:12px;">
+        <b>Einträge suchen</b>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; align-items:center;">
+          <input type="text" id="placeSearchQ" placeholder="Name, Ort oder PLZ" style="flex:1; min-width:180px; margin:0;" onkeydown="if (event.key === 'Enter') searchPlaces()">
+          <select id="placeSearchCat" style="width:auto; margin:0;" onchange="searchPlaces()">
+            <option value="">Alle Kategorien</option>
+            <option value="restaurant">Restaurant</option>
+            <option value="imbiss">Imbiss</option>
+            <option value="lebensmittel">Lebensmittel</option>
+            <option value="unterkunft">Unterkunft</option>
+            <option value="camping">Camping</option>
+            <option value="sonstiges">Sonstiges</option>
+          </select>
+          <label style="white-space:nowrap;"><input type="checkbox" id="placeSearchDrafts" onchange="searchPlaces()"> nur Entwürfe</label>
+          <button class="add-btn" style="margin:0; width:auto;" onclick="searchPlaces()">Suchen</button>
         </div>
-        <div id="bulkResult" class="hint" style="margin-top:10px;"></div>
+        <div id="placeSearchInfo" class="hint" style="margin-top:8px;">Ca. 370.000 Orte – bitte Name, Ort oder PLZ eingeben.</div>
       </div>
       <div id="placesList"></div>
       <button class="add-btn" onclick="openEditor('places')">+ Neuer Eintrag</button>
@@ -1024,6 +1032,7 @@ async function loadLogos() {
 }
 
 async function loadTable(table) {
+  if (table === 'places') return searchPlaces(true);
   try {
     if (table === 'ads') {
       try { window.adStats = (await callApi('ads', 'stats')).data || {}; } catch (e) { window.adStats = {}; }
@@ -1111,6 +1120,33 @@ async function loadTradeSuggestions() {
     });
   } catch (e) {
     box.innerHTML = '<div class="empty">Konnte Eingaben nicht laden (' + e.message + ').</div>';
+  }
+}
+
+// Regionales: wegen der Menge (ganz Deutschland) nur gezielt suchen statt alles zu laden
+async function searchPlaces(silent) {
+  const info = document.getElementById('placeSearchInfo');
+  const q = document.getElementById('placeSearchQ').value.trim();
+  const category = document.getElementById('placeSearchCat').value;
+  const drafts = document.getElementById('placeSearchDrafts').checked;
+  if (!q && !drafts) {
+    dataCache.places = [];
+    document.getElementById('placesList').innerHTML = '';
+    info.textContent = 'Ca. 370.000 Orte – bitte Name, Ort oder PLZ eingeben' + (category ? '.' : ' (oder „nur Entwürfe“ anhaken).');
+    if (!silent) toast('Bitte einen Suchbegriff eingeben.', true);
+    return;
+  }
+  info.textContent = 'Suche …';
+  try {
+    const r = await callImport({ action: 'search', q, category: category || null, drafts });
+    dataCache.places = r.data || [];
+    renderList('places');
+    info.textContent = dataCache.places.length
+      ? dataCache.places.length + ' Treffer' + (r.more ? ' (nur die ersten 200 – Suche bitte genauer machen)' : '') + '.'
+      : 'Keine Treffer.';
+  } catch (e) {
+    info.textContent = '';
+    toast(e.message, true);
   }
 }
 
@@ -1224,97 +1260,6 @@ async function importPlaces() {
   }
 }
 
-
-const BULK_TILES = [[51.25,9.6,51.45,9.9],[51.25,9.9,51.45,10.2],[51.25,10.2,51.45,10.5],[51.25,10.5,51.45,10.8],[51.45,7.2,51.65,7.5],[51.45,9.3,51.65,9.6],[51.45,9.6,51.65,9.9],[51.45,9.9,51.65,10.2],[51.45,10.2,51.65,10.5],[51.45,10.5,51.65,10.8],[51.45,10.8,51.65,11.1],[51.65,9.0,51.85,9.3],[51.65,9.3,51.85,9.6],[51.65,9.6,51.85,9.9],[51.65,9.9,51.85,10.2],[51.65,10.2,51.85,10.5],[51.65,10.5,51.85,10.8],[51.65,10.8,51.85,11.1],[51.65,11.1,51.85,11.4],[51.85,9.0,52.05,9.3],[51.85,9.3,52.05,9.6],[51.85,9.6,52.05,9.9],[51.85,9.9,52.05,10.2],[51.85,10.2,52.05,10.5],[51.85,10.5,52.05,10.8],[51.85,10.8,52.05,11.1],[51.85,11.1,52.05,11.4],[52.05,7.5,52.25,7.8],[52.05,7.8,52.25,8.1],[52.05,8.1,52.25,8.4],[52.05,9.0,52.25,9.3],[52.05,9.3,52.25,9.6],[52.05,9.6,52.25,9.9],[52.05,9.9,52.25,10.2],[52.05,10.2,52.25,10.5],[52.05,10.5,52.25,10.8],[52.05,10.8,52.25,11.1],[52.25,6.6,52.45,6.9],[52.25,6.9,52.45,7.2],[52.25,7.5,52.45,7.8],[52.25,7.8,52.45,8.1],[52.25,8.1,52.45,8.4],[52.25,8.4,52.45,8.7],[52.25,8.7,52.45,9.0],[52.25,9.0,52.45,9.3],[52.25,9.3,52.45,9.6],[52.25,9.6,52.45,9.9],[52.25,9.9,52.45,10.2],[52.25,10.2,52.45,10.5],[52.25,10.5,52.45,10.8],[52.25,10.8,52.45,11.1],[52.45,6.6,52.65,6.9],[52.45,6.9,52.65,7.2],[52.45,7.2,52.65,7.5],[52.45,7.5,52.65,7.8],[52.45,7.8,52.65,8.1],[52.45,8.1,52.65,8.4],[52.45,8.4,52.65,8.7],[52.45,8.7,52.65,9.0],[52.45,9.0,52.65,9.3],[52.45,9.3,52.65,9.6],[52.45,9.6,52.65,9.9],[52.45,9.9,52.65,10.2],[52.45,10.2,52.65,10.5],[52.45,10.5,52.65,10.8],[52.45,10.8,52.65,11.1],[52.45,11.1,52.65,11.4],[52.65,6.9,52.85,7.2],[52.65,7.2,52.85,7.5],[52.65,7.5,52.85,7.8],[52.65,7.8,52.85,8.1],[52.65,8.1,52.85,8.4],[52.65,8.4,52.85,8.7],[52.65,8.7,52.85,9.0],[52.65,9.0,52.85,9.3],[52.65,9.3,52.85,9.6],[52.65,9.6,52.85,9.9],[52.65,9.9,52.85,10.2],[52.65,10.2,52.85,10.5],[52.65,10.5,52.85,10.8],[52.65,10.8,52.85,11.1],[52.65,11.1,52.85,11.4],[52.65,11.4,52.85,11.7],[52.85,7.2,53.05,7.5],[52.85,7.5,53.05,7.8],[52.85,7.8,53.05,8.1],[52.85,8.1,53.05,8.4],[52.85,8.4,53.05,8.7],[52.85,8.7,53.05,9.0],[52.85,9.0,53.05,9.3],[52.85,9.3,53.05,9.6],[52.85,9.6,53.05,9.9],[52.85,9.9,53.05,10.2],[52.85,10.2,53.05,10.5],[52.85,10.5,53.05,10.8],[52.85,10.8,53.05,11.1],[52.85,11.1,53.05,11.4],[52.85,11.4,53.05,11.7],[53.05,7.2,53.25,7.5],[53.05,7.5,53.25,7.8],[53.05,7.8,53.25,8.1],[53.05,8.1,53.25,8.4],[53.05,8.4,53.25,8.7],[53.05,8.7,53.25,9.0],[53.05,9.0,53.25,9.3],[53.05,9.3,53.25,9.6],[53.05,9.6,53.25,9.9],[53.05,9.9,53.25,10.2],[53.05,10.2,53.25,10.5],[53.05,10.5,53.25,10.8],[53.05,10.8,53.25,11.1],[53.05,11.1,53.25,11.4],[53.05,11.4,53.25,11.7],[53.25,6.9,53.45,7.2],[53.25,7.2,53.45,7.5],[53.25,7.5,53.45,7.8],[53.25,7.8,53.45,8.1],[53.25,8.1,53.45,8.4],[53.25,8.4,53.45,8.7],[53.25,8.7,53.45,9.0],[53.25,9.0,53.45,9.3],[53.25,9.3,53.45,9.6],[53.25,9.6,53.45,9.9],[53.25,9.9,53.45,10.2],[53.25,10.2,53.45,10.5],[53.25,10.5,53.45,10.8],[53.25,10.8,53.45,11.1],[53.45,6.6,53.65,6.9],[53.45,6.9,53.65,7.2],[53.45,7.2,53.65,7.5],[53.45,7.5,53.65,7.8],[53.45,7.8,53.65,8.1],[53.45,8.1,53.65,8.4],[53.45,8.4,53.65,8.7],[53.45,8.7,53.65,9.0],[53.45,9.0,53.65,9.3],[53.45,9.3,53.65,9.6],[53.45,9.6,53.65,9.9],[53.45,9.9,53.65,10.2],[53.45,10.2,53.65,10.5],[53.45,10.5,53.65,10.8],[53.65,6.9,53.85,7.2],[53.65,7.2,53.85,7.5],[53.65,7.5,53.85,7.8],[53.65,7.8,53.85,8.1],[53.65,8.4,53.85,8.7],[53.65,8.7,53.85,9.0],[53.65,9.0,53.85,9.3],[53.65,9.3,53.85,9.6],[53.85,8.4,54.05,8.7],[53.85,8.7,54.05,9.0],[53.85,9.0,54.05,9.3],[53.85,9.3,54.05,9.6]];
-let bulkRunning = false;
-let bulkStopFlag = false;
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-function bulkDone() {
-  try { return JSON.parse(localStorage.getItem('ht_bulk_done') || '[]'); } catch (e) { return []; }
-}
-function bulkSetDone(list) {
-  try { localStorage.setItem('ht_bulk_done', JSON.stringify(list)); } catch (e) {}
-}
-function bulkStop() { bulkStopFlag = true; }
-function bulkReset() {
-  if (bulkRunning) { toast('Läuft gerade – erst Stopp drücken.', true); return; }
-  if (!confirm('Fortschritt des Sammelimports zurücksetzen?')) return;
-  bulkSetDone([]);
-  document.getElementById('bulkResult').textContent = 'Fortschritt zurückgesetzt.';
-}
-
-async function bulkTile(bbox, groups, depth, stats) {
-  const [s, w, n, e] = bbox;
-  const box = '(' + s + ',' + w + ',' + n + ',' + e + ')';
-  const parts = groups.flatMap((k) => OSM_FILTERS[k].map((f) => 'nwr' + f + box + ';'));
-  const CAP = 2500;
-  const dummy = { textContent: '' };
-  const data = await fetchOverpass('[out:json][timeout:60];(' + parts.join('') + ');out center tags ' + CAP + ';', dummy);
-  const elements = data.elements || [];
-  if (elements.length >= CAP && depth < 3) {
-    const mLat = (s + n) / 2, mLng = (w + e) / 2;
-    for (const sub of [[s, w, mLat, mLng], [s, mLng, mLat, e], [mLat, w, n, mLng], [mLat, mLng, n, e]]) {
-      if (bulkStopFlag) return;
-      await sleep(8000);
-      await bulkTile(sub, groups, depth + 1, stats);
-    }
-    return;
-  }
-  const rows = elements.map(osmToRow).filter(Boolean);
-  stats.found += elements.length;
-  const publish = document.getElementById('impPublish').checked;
-  for (let i = 0; i < rows.length; i += 500) {
-    const r = await callImport({ action: 'insert_rows', rows: rows.slice(i, i + 500), publish });
-    stats.inserted += r.inserted;
-  }
-}
-
-async function bulkImport() {
-  if (bulkRunning) return;
-  const out = document.getElementById('bulkResult');
-  const groups = [];
-  if (document.getElementById('impGastro').checked) groups.push('gastro');
-  if (document.getElementById('impUnterkunft').checked) groups.push('unterkunft');
-  if (document.getElementById('impCamping').checked) groups.push('camping');
-  if (document.getElementById('impLebensmittel').checked) groups.push('lebensmittel');
-  if (!groups.length) { toast('Bitte oben mindestens eine Kategorie wählen.', true); return; }
-  const publish = document.getElementById('impPublish').checked;
-  if (!confirm('Sammelimport für ganz Niedersachsen & Bremen starten?\n\n' + (publish ? 'Die Einträge werden SOFORT veröffentlicht.' : 'Die Einträge werden als ENTWURF angelegt.') + '\nDas Fenster muss 30–60 Minuten offen bleiben.')) return;
-  bulkRunning = true; bulkStopFlag = false;
-  const doneList = bulkDone();
-  const stats = { found: 0, inserted: 0, failed: [] };
-  const t0 = Date.now();
-  for (let i = 0; i < BULK_TILES.length; i++) {
-    if (bulkStopFlag) break;
-    if (doneList.includes(i)) continue;
-    out.textContent = 'Kachel ' + (i + 1) + ' von ' + BULK_TILES.length + ' … bisher ' + stats.inserted + ' neue Einträge (' + Math.round((Date.now() - t0) / 60000) + ' Min.)';
-    let ok = false;
-    const waits = [30, 60, 120, 180];
-    for (let attempt = 0; attempt <= waits.length && !ok && !bulkStopFlag; attempt++) {
-      try {
-        await bulkTile(BULK_TILES[i], groups, 0, stats);
-        ok = true;
-      } catch (e) {
-        if (attempt === waits.length) { out.textContent = 'Kachel ' + (i + 1) + ' übersprungen: ' + e.message; break; }
-        // Overpass drosselt (429) oder ist überlastet (504): länger warten, dann erneut
-        for (let sec = waits[attempt]; sec > 0 && !bulkStopFlag; sec--) {
-          out.textContent = 'Kachel ' + (i + 1) + ': OpenStreetMap ist gerade ausgelastet – neuer Versuch in ' + sec + ' s (Versuch ' + (attempt + 2) + ' von ' + (waits.length + 1) + ') …';
-          await sleep(1000);
-        }
-      }
-    }
-    if (ok) { doneList.push(i); bulkSetDone(doneList); }
-    else if (!bulkStopFlag) stats.failed.push(i + 1);
-    await sleep(10000);
-  }
-  bulkRunning = false;
-  const left = BULK_TILES.length - bulkDone().length;
-  out.textContent = (bulkStopFlag ? 'Gestoppt. ' : 'Fertig. ') + stats.inserted + ' neue Einträge angelegt (' + stats.found + ' gefunden). ' +
-    (left > 0 ? left + ' Kacheln noch offen – erneut starten setzt fort.' : 'Alle Kacheln erledigt.') +
-    (stats.failed.length ? ' Fehlgeschlagen: ' + stats.failed.join(', ') + '.' : '');
-  await loadTable('places');
-}
 
 async function placesBulk(action) {
   const msg = action === 'publish_drafts' ? 'Alle importierten Entwürfe in der App sichtbar machen?' : 'Alle importierten, noch nicht freigegebenen Entwürfe löschen?';
